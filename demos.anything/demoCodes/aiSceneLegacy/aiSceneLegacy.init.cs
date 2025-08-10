@@ -48,6 +48,18 @@ namespace aiSceneLegacy {
             gl.glLightfv(GL.GL_LIGHT1, GL.GL_POSITION, LightPosition);
             gl.glEnable(GL.GL_LIGHT1);
 
+            this.canvas.GLKeyDown += Canvas_GLKeyDown;
+
+            MessageBox.Show("P: polygon mode");
+        }
+
+        private int polygonModeIndex = 2;
+        private static GLenum[] polygonModes = [GL.GL_POINT, GL.GL_LINE, GL.GL_FILL];
+        private void Canvas_GLKeyDown(object sender, GLKeyEventArgs e) {
+            if (e.KeyData == GLKeys.P) {
+                polygonModeIndex++;
+                if (polygonModeIndex >= polygonModes.Length) { polygonModeIndex = 0; }
+            }
         }
 
         private bool Import3DFromFile(string filename) {

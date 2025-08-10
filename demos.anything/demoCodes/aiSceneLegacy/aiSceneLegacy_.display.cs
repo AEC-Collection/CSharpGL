@@ -115,10 +115,8 @@ namespace aiSceneLegacy {
             }
 
             max = 1;
-            if (aiReturn.aiReturn_SUCCESS == material.aiGetMaterialIntegerArray(/*AI_MATKEY_ENABLE_WIREFRAME*/"$mat.wireframe", 0, 0, &wireframe, &max))
-                fill_mode = wireframe != 0 ? GL.GL_LINE : GL.GL_FILL;
-            else
-                fill_mode = GL.GL_FILL;
+            if (aiReturn.aiReturn_SUCCESS == material.aiGetMaterialIntegerArray(/*AI_MATKEY_ENABLE_WIREFRAME*/"$mat.wireframe", 0, 0, &wireframe, &max)) { fill_mode = wireframe != 0 ? GL.GL_LINE : GL.GL_FILL; }
+            else { fill_mode = /*GL.GL_FILL*/polygonModes[polygonModeIndex]; }
             gl.glPolygonMode(GL.GL_FRONT_AND_BACK, fill_mode);
 
             max = 1;
