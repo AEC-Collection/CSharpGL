@@ -71,12 +71,14 @@ namespace aiSceneLegacy {
             int max;   // changed: to unsigned
 
             int texIndex = 0;
-            string texPath;   //contains filename of texture
+            string? texPath;   //contains filename of texture
 
-            if (aiReturn.aiReturn_SUCCESS == material.GetTexture((int)aiTextureType.aiTextureType_DIFFUSE, texIndex, out texPath)) {
+            if (aiReturn.aiReturn_SUCCESS == material.GetTexture(aiTextureType.aiTextureType_DIFFUSE, texIndex, out texPath)) {
                 //bind texture
-                uint texId = textureIdMap[texPath];
-                gl.glBindTexture(GL.GL_TEXTURE_2D, texId);
+                if (texPath != null) {
+                    uint texId = textureIdMap[texPath];
+                    gl.glBindTexture(GL.GL_TEXTURE_2D, texId);
+                }
             }
 
             if (aiReturn.aiReturn_SUCCESS != material.aiGetMaterialColor("$clr.diffuse", 0, 0, &diffuse)) {

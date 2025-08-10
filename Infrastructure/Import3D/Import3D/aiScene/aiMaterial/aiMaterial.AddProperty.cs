@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Import3D {
     unsafe partial class aiMaterial {
-        public aiReturn AddProperty(string input, string key, int type, int index) {
+        public aiReturn AddProperty(string input, string key, aiTextureType type, int index) {
             Debug.Assert(sizeof(UInt32) == 4);
             var str = Marshal.StringToHGlobalAnsi(input);
             var result = AddBinaryProperty((byte*)str, (input.Length + 1 + 4),
@@ -15,25 +15,25 @@ namespace Import3D {
         }
 
 
-        public aiReturn AddProperty(mat4 input, int pNumValues, string key, int type, int index) {
+        public aiReturn AddProperty(mat4 input, int pNumValues, string key, aiTextureType type, int index) {
             return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Float);
         }
-        public aiReturn AddProperty(vec4 input, int pNumValues, string key, int type, int index) {
+        public aiReturn AddProperty(vec4 input, int pNumValues, string key, aiTextureType type, int index) {
             return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Float);
         }
-        public aiReturn AddProperty(vec3 input, int pNumValues, string key, int type, int index) {
+        public aiReturn AddProperty(vec3 input, int pNumValues, string key, aiTextureType type, int index) {
             return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Float);
         }
-        public aiReturn AddProperty(double input, int pNumValues, string key, int type, int index) {
+        public aiReturn AddProperty(double input, int pNumValues, string key, aiTextureType type, int index) {
             return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Double);
         }
-        public aiReturn AddProperty(float input, int pNumValues, string key, int type, int index) {
+        public aiReturn AddProperty(float input, int pNumValues, string key, aiTextureType type, int index) {
             return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Float);
         }
-        public aiReturn AddProperty(int input, int pNumValues, string key, int type, int index) {
+        public aiReturn AddProperty(int input, int pNumValues, string key, aiTextureType type, int index) {
             return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Integer);
         }
-        public aiReturn AddProperty<T>(T input, int pNumValues, string key, int type, int index, aiPropertyTypeInfo propertyTypeInfo)
+        public aiReturn AddProperty<T>(T input, int pNumValues, string key, aiTextureType type, int index, aiPropertyTypeInfo propertyTypeInfo)
             where T : struct {
             var pin = GCHandle.Alloc(input, GCHandleType.Pinned);
             var addr = pin.AddrOfPinnedObject();
@@ -43,7 +43,7 @@ namespace Import3D {
             return result;
         }
         private aiReturn AddBinaryProperty(byte* input, int pSizeInBytes,
-            string key, int type, int index, aiPropertyTypeInfo typeInfo) {
+            string key, aiTextureType type, int index, aiPropertyTypeInfo typeInfo) {
             Debug.Assert(input != null);
             Debug.Assert(key != null);
             Debug.Assert(0 != pSizeInBytes);

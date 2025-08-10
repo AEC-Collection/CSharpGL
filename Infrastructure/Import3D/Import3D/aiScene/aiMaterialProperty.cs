@@ -32,7 +32,7 @@ namespace Import3D {
         /// For non-texture properties, this member is always 0
         /// (or, better-said, #aiTextureType_NONE).
         /// </summary>
-        public int mSemantic;
+        public aiTextureType mSemantic;
 
         /// <summary> Textures: Specifies the index of the texture.
         ///  For non-texture properties, this member is always 0.

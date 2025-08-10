@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Import3D {
     unsafe partial class aiMaterial {
-        public aiReturn aiGetMaterialColor(string key, int type, int index, Import3D.vec4* pOut) {
+        public aiReturn aiGetMaterialColor(string key, aiTextureType type, int index, Import3D.vec4* pOut) {
             int iMax = 4;
             aiReturn eRet = this.aiGetMaterialFloatArray(key, type, index, (float*)pOut, &iMax);
 

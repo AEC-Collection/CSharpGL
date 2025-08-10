@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace Import3D {
     unsafe partial class aiMaterial {
 
-        public aiReturn GetTexture(int type,
+        public aiReturn GetTexture(aiTextureType type,
                                    int index,
                                    out string? path,
                                    aiTextureMapping* mapping = null,
@@ -18,7 +18,7 @@ namespace Import3D {
         }
 
         aiReturn aiGetMaterialTexture(
-            int type, int index, out string? path,
+            aiTextureType type, int index, out string? path,
             aiTextureMapping* _mapping, int* uvindex, float* blend, aiTextureOp* op, aiTextureMapMode* mapmode, int* flags = null) {
 
             // Get the path to the texture

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace Import3D {
     unsafe partial class aiMaterial {
         // Get a specific property from a material
-        public aiReturn aiGetMaterialProperty(string pKey, int type, int index, out aiMaterialProperty? pPropOut) {
+        public aiReturn aiGetMaterialProperty(string pKey, aiTextureType type, int index, out aiMaterialProperty? pPropOut) {
             Debug.Assert(pKey != null);
 
             /*  Just search for a property with exactly this name ..
@@ -18,7 +18,7 @@ namespace Import3D {
 
                 if (prop != null /* just for safety ... */
                  && prop.mKey.StartsWith(pKey)
-                 && (int.MaxValue == type || prop.mSemantic == type) /* UINT_MAX is a wild-card, but this is undocumented :-) */
+                 && (aiTextureType._aiTextureType_Force32Bit == type || prop.mSemantic == type) /* UINT_MAX is a wild-card, but this is undocumented :-) */
                         && (int.MaxValue == index || prop.mIndex == index)) {
                     pPropOut = this.mProperties[i];
                     return aiReturn.aiReturn_SUCCESS;

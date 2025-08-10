@@ -24,7 +24,7 @@ namespace Import3D {
         * @return Specifies whether the key has been found. If not, the output
         *   float remains unmodified.*/
         // ---------------------------------------------------------------------------
-        public aiReturn aiGetMaterialFloat(string pKey, int type, int index, float* pOut) {
+        public aiReturn aiGetMaterialFloat(string pKey, aiTextureType type, int index, float* pOut) {
             return this.aiGetMaterialFloatArray(pKey, type, index, pOut, null);
         }
     }

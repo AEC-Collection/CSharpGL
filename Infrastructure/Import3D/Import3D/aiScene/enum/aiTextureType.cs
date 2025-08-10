@@ -181,7 +181,7 @@
         aiTextureType_GLTF_METALLIC_ROUGHNESS = 27,
 
         //# ifndef SWIG
-        //        _aiTextureType_Force32Bit = INT_MAX
+        _aiTextureType_Force32Bit = int.MaxValue
         //#endif
     }
 

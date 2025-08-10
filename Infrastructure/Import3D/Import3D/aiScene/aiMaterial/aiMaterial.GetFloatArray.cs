@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace Import3D {
     unsafe partial class aiMaterial {
         // Get an array of floating-point values from the material.
-        public aiReturn aiGetMaterialFloatArray(string pKey, int type, int index, float* pOut, int* pMax) {
+        public aiReturn aiGetMaterialFloatArray(string pKey, aiTextureType type, int index, float* pOut, int* pMax) {
             Debug.Assert(pOut != null);
 
             aiMaterialProperty? prop;

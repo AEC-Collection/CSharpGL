@@ -71,7 +71,7 @@ namespace aiSceneLegacy {
                 string path = "";  // filename
 
                 while (texFound == aiReturn.aiReturn_SUCCESS) {
-                    texFound = scene.mMaterials[m].GetTexture((int)aiTextureType.aiTextureType_DIFFUSE, texIndex, out path);
+                    texFound = scene.mMaterials[m].GetTexture(aiTextureType.aiTextureType_DIFFUSE, texIndex, out path);
                     if (texFound == aiReturn.aiReturn_SUCCESS) {
                         //textureIdMap[path.data] = null; //fill map with textures, pointers still NULL yet
                         textureIdMap.Add(path, 0);

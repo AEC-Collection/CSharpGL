@@ -149,39 +149,39 @@ namespace Import3D.Obj {
                     const int uvwIndex = 0;
 
                     if (pCurrentMaterial.texture != null) {
-                        mat.AddProperty(pCurrentMaterial.texture, /*AI_MATKEY_TEXTURE_DIFFUSE(0)*/"$tex.file", (int)aiTextureType.aiTextureType_DIFFUSE, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_DIFFUSE(0)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_DIFFUSE, 0);
+                        mat.AddProperty(pCurrentMaterial.texture, /*AI_MATKEY_TEXTURE_DIFFUSE(0)*/"$tex.file", aiTextureType.aiTextureType_DIFFUSE, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_DIFFUSE(0)*/"$tex.uvwsrc", aiTextureType.aiTextureType_DIFFUSE, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureDiffuseType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_DIFFUSE);
                         }
                     }
 
                     if (pCurrentMaterial.textureAmbient != null) {
-                        mat.AddProperty(pCurrentMaterial.textureAmbient, /*AI_MATKEY_TEXTURE_AMBIENT(0)*/"$tex.file", (int)aiTextureType.aiTextureType_AMBIENT, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_AMBIENT(0)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_AMBIENT, 0);
+                        mat.AddProperty(pCurrentMaterial.textureAmbient, /*AI_MATKEY_TEXTURE_AMBIENT(0)*/"$tex.file", aiTextureType.aiTextureType_AMBIENT, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_AMBIENT(0)*/"$tex.uvwsrc", aiTextureType.aiTextureType_AMBIENT, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureAmbientType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_AMBIENT);
                         }
                     }
 
                     if (pCurrentMaterial.textureEmissive != null) {
-                        mat.AddProperty(pCurrentMaterial.textureEmissive, /*AI_MATKEY_TEXTURE_EMISSIVE(0)*/"$tex.file", (int)aiTextureType.aiTextureType_EMISSIVE, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_EMISSIVE(0)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_EMISSIVE, 0);
+                        mat.AddProperty(pCurrentMaterial.textureEmissive, /*AI_MATKEY_TEXTURE_EMISSIVE(0)*/"$tex.file", aiTextureType.aiTextureType_EMISSIVE, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_EMISSIVE(0)*/"$tex.uvwsrc", aiTextureType.aiTextureType_EMISSIVE, 0);
                     }
 
                     if (pCurrentMaterial.textureSpecular != null) {
-                        mat.AddProperty(pCurrentMaterial.textureSpecular, /*AI_MATKEY_TEXTURE_SPECULAR(0)*/"$tex.file", (int)aiTextureType.aiTextureType_SPECULAR, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_SPECULAR(0)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_SPECULAR, 0);
+                        mat.AddProperty(pCurrentMaterial.textureSpecular, /*AI_MATKEY_TEXTURE_SPECULAR(0)*/"$tex.file", aiTextureType.aiTextureType_SPECULAR, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_SPECULAR(0)*/"$tex.uvwsrc", aiTextureType.aiTextureType_SPECULAR, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureSpecularType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_SPECULAR);
                         }
                     }
 
                     if (pCurrentMaterial.textureBump != null) {
-                        mat.AddProperty(pCurrentMaterial.textureBump, /*AI_MATKEY_TEXTURE_HEIGHT(0)*/"$tex.file", (int)aiTextureType.aiTextureType_HEIGHT, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_HEIGHT(0)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_HEIGHT, 0);
+                        mat.AddProperty(pCurrentMaterial.textureBump, /*AI_MATKEY_TEXTURE_HEIGHT(0)*/"$tex.file", aiTextureType.aiTextureType_HEIGHT, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_HEIGHT(0)*/"$tex.uvwsrc", aiTextureType.aiTextureType_HEIGHT, 0);
                         if (pCurrentMaterial.bump_multiplier != 1.0) {
-                            mat.AddProperty(pCurrentMaterial.bump_multiplier, 1, /*AI_MATKEY_OBJ_BUMPMULT_HEIGHT(0)*/"$tex.bumpmult", (int)aiTextureType.aiTextureType_HEIGHT, 0);
+                            mat.AddProperty(pCurrentMaterial.bump_multiplier, 1, /*AI_MATKEY_OBJ_BUMPMULT_HEIGHT(0)*/"$tex.bumpmult", aiTextureType.aiTextureType_HEIGHT, 0);
                         }
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureBumpType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_HEIGHT);
@@ -189,10 +189,10 @@ namespace Import3D.Obj {
                     }
 
                     if (pCurrentMaterial.textureNormal != null) {
-                        mat.AddProperty(pCurrentMaterial.textureNormal, /*AI_MATKEY_TEXTURE_NORMALS(0)*/"$tex.file", (int)aiTextureType.aiTextureType_NORMALS, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_NORMALS(0)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_NORMALS, 0);
+                        mat.AddProperty(pCurrentMaterial.textureNormal, /*AI_MATKEY_TEXTURE_NORMALS(0)*/"$tex.file", aiTextureType.aiTextureType_NORMALS, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_NORMALS(0)*/"$tex.uvwsrc", aiTextureType.aiTextureType_NORMALS, 0);
                         if (pCurrentMaterial.bump_multiplier != 1.0) {
-                            mat.AddProperty(pCurrentMaterial.bump_multiplier, 1, /*AI_MATKEY_OBJ_BUMPMULT_NORMALS(0)*/"$tex.bumpmult", (int)aiTextureType.aiTextureType_NORMALS, 0);
+                            mat.AddProperty(pCurrentMaterial.bump_multiplier, 1, /*AI_MATKEY_OBJ_BUMPMULT_NORMALS(0)*/"$tex.bumpmult", aiTextureType.aiTextureType_NORMALS, 0);
                         }
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureNormalType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_NORMALS);
@@ -206,8 +206,8 @@ namespace Import3D.Obj {
 
                         var count = type == ObjMaterial.TextureType.TextureReflectionSphereType ? 1 : 6;
                         for (var i = 0; i < count; i++) {
-                            mat.AddProperty(pCurrentMaterial.textureReflection[i], /*AI_MATKEY_TEXTURE_REFLECTION(i)*/"$tex.file", (int)aiTextureType.aiTextureType_REFLECTION, i);
-                            mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_REFLECTION(i)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_REFLECTION, i);
+                            mat.AddProperty(pCurrentMaterial.textureReflection[i], /*AI_MATKEY_TEXTURE_REFLECTION(i)*/"$tex.file", aiTextureType.aiTextureType_REFLECTION, i);
+                            mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_REFLECTION(i)*/"$tex.uvwsrc", aiTextureType.aiTextureType_REFLECTION, i);
 
                             if (pCurrentMaterial.clamp[(int)type])
                                 addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_REFLECTION, 1, i);
@@ -215,48 +215,48 @@ namespace Import3D.Obj {
                     }
 
                     if (pCurrentMaterial.textureDisp != null) {
-                        mat.AddProperty(pCurrentMaterial.textureDisp, /*AI_MATKEY_TEXTURE_DISPLACEMENT(0)*/"$tex.file", (int)aiTextureType.aiTextureType_DISPLACEMENT, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_DISPLACEMENT(0)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_DISPLACEMENT, 0);
+                        mat.AddProperty(pCurrentMaterial.textureDisp, /*AI_MATKEY_TEXTURE_DISPLACEMENT(0)*/"$tex.file", aiTextureType.aiTextureType_DISPLACEMENT, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_DISPLACEMENT(0)*/"$tex.uvwsrc", aiTextureType.aiTextureType_DISPLACEMENT, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureDispType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_DISPLACEMENT);
                         }
                     }
 
                     if (pCurrentMaterial.textureOpacity != null) {
-                        mat.AddProperty(pCurrentMaterial.textureOpacity, /*AI_MATKEY_TEXTURE_OPACITY(0)*/"$tex.file", (int)aiTextureType.aiTextureType_OPACITY, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_OPACITY(0)*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_OPACITY, 0);
+                        mat.AddProperty(pCurrentMaterial.textureOpacity, /*AI_MATKEY_TEXTURE_OPACITY(0)*/"$tex.file", aiTextureType.aiTextureType_OPACITY, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_OPACITY(0)*/"$tex.uvwsrc", aiTextureType.aiTextureType_OPACITY, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureOpacityType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_OPACITY);
                         }
                     }
 
                     if (pCurrentMaterial.textureSpecularity != null) {
-                        mat.AddProperty(pCurrentMaterial.textureSpecularity, /*AI_MATKEY_TEXTURE_SHININESS(0)*/"$tex.file", (int)aiTextureType.aiTextureType_SHININESS, 0);
-                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_SHININESS(0)*/ "$tex.uvwsrc", (int)aiTextureType.aiTextureType_SHININESS, 0);
+                        mat.AddProperty(pCurrentMaterial.textureSpecularity, /*AI_MATKEY_TEXTURE_SHININESS(0)*/"$tex.file", aiTextureType.aiTextureType_SHININESS, 0);
+                        mat.AddProperty(uvwIndex, 1, /*AI_MATKEY_UVWSRC_SHININESS(0)*/ "$tex.uvwsrc", aiTextureType.aiTextureType_SHININESS, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureSpecularityType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_SHININESS);
                         }
                     }
 
                     if (pCurrentMaterial.textureRoughness != null) {
-                        mat.AddProperty(pCurrentMaterial.textureRoughness, /*_AI_MATKEY_TEXTURE_BASE*/"$tex.file", (int)aiTextureType.aiTextureType_DIFFUSE_ROUGHNESS, 0);
-                        mat.AddProperty(uvwIndex, 1, /*_AI_MATKEY_UVWSRC_BASE*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_DIFFUSE_ROUGHNESS, 0);
+                        mat.AddProperty(pCurrentMaterial.textureRoughness, /*_AI_MATKEY_TEXTURE_BASE*/"$tex.file", aiTextureType.aiTextureType_DIFFUSE_ROUGHNESS, 0);
+                        mat.AddProperty(uvwIndex, 1, /*_AI_MATKEY_UVWSRC_BASE*/"$tex.uvwsrc", aiTextureType.aiTextureType_DIFFUSE_ROUGHNESS, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureRoughnessType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_DIFFUSE_ROUGHNESS);
                         }
                     }
 
                     if (pCurrentMaterial.textureMetallic != null) {
-                        mat.AddProperty(pCurrentMaterial.textureMetallic, /*_AI_MATKEY_TEXTURE_BASE*/"$tex.file", (int)aiTextureType.aiTextureType_METALNESS, 0);
-                        mat.AddProperty(uvwIndex, 1, /*_AI_MATKEY_UVWSRC_BASE*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_METALNESS, 0);
+                        mat.AddProperty(pCurrentMaterial.textureMetallic, /*_AI_MATKEY_TEXTURE_BASE*/"$tex.file", aiTextureType.aiTextureType_METALNESS, 0);
+                        mat.AddProperty(uvwIndex, 1, /*_AI_MATKEY_UVWSRC_BASE*/"$tex.uvwsrc", aiTextureType.aiTextureType_METALNESS, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureMetallicType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_METALNESS);
                         }
                     }
 
                     if (pCurrentMaterial.textureSheen != null) {
-                        mat.AddProperty(pCurrentMaterial.textureSheen, /*_AI_MATKEY_TEXTURE_BASE*/"$tex.file", (int)aiTextureType.aiTextureType_SHEEN, 0);
-                        mat.AddProperty(uvwIndex, 1, /*_AI_MATKEY_UVWSRC_BASE*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_SHEEN, 0);
+                        mat.AddProperty(pCurrentMaterial.textureSheen, /*_AI_MATKEY_TEXTURE_BASE*/"$tex.file", aiTextureType.aiTextureType_SHEEN, 0);
+                        mat.AddProperty(uvwIndex, 1, /*_AI_MATKEY_UVWSRC_BASE*/"$tex.uvwsrc", aiTextureType.aiTextureType_SHEEN, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureSheenType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_SHEEN);
                         }
@@ -264,8 +264,8 @@ namespace Import3D.Obj {
 
                     if (pCurrentMaterial.textureRMA != null) {
                         // NOTE: glTF importer places Rough/Metal/AO texture in Unknown so doing the same here for consistency.
-                        mat.AddProperty(pCurrentMaterial.textureRMA, /*_AI_MATKEY_TEXTURE_BASE*/"$tex.file", (int)aiTextureType.aiTextureType_UNKNOWN, 0);
-                        mat.AddProperty(uvwIndex, 1, /*_AI_MATKEY_UVWSRC_BASE*/"$tex.uvwsrc", (int)aiTextureType.aiTextureType_UNKNOWN, 0);
+                        mat.AddProperty(pCurrentMaterial.textureRMA, /*_AI_MATKEY_TEXTURE_BASE*/"$tex.file", aiTextureType.aiTextureType_UNKNOWN, 0);
+                        mat.AddProperty(uvwIndex, 1, /*_AI_MATKEY_UVWSRC_BASE*/"$tex.uvwsrc", aiTextureType.aiTextureType_UNKNOWN, 0);
                         if (pCurrentMaterial.clamp[(int)ObjMaterial.TextureType.TextureRMAType]) {
                             addTextureMappingModeProperty(mat, aiTextureType.aiTextureType_UNKNOWN);
                         }
@@ -291,8 +291,8 @@ namespace Import3D.Obj {
             //    return;
             //}
 
-            mat.AddProperty(clampMode, 1, /*AI_MATKEY_MAPPINGMODE_U(type, index)*//*_AI_MATKEY_MAPPINGMODE_U_BASE*/"$tex.mapmodeu", (int)type, index);
-            mat.AddProperty(clampMode, 1, /*AI_MATKEY_MAPPINGMODE_V(type, index)*//*_AI_MATKEY_MAPPINGMODE_V_BASE*/"$tex.mapmodev", (int)type, index);
+            mat.AddProperty(clampMode, 1, /*AI_MATKEY_MAPPINGMODE_U(type, index)*//*_AI_MATKEY_MAPPINGMODE_U_BASE*/"$tex.mapmodeu", type, index);
+            mat.AddProperty(clampMode, 1, /*AI_MATKEY_MAPPINGMODE_V(type, index)*//*_AI_MATKEY_MAPPINGMODE_V_BASE*/"$tex.mapmodev", type, index);
         }
 
         private static aiNode CreateNodes(

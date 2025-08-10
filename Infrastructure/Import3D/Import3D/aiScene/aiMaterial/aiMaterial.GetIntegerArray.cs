@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace Import3D {
     unsafe partial class aiMaterial {
-        public aiReturn aiGetMaterialIntegerArray(string pKey, int type, int index, int* pOut, int* pMax) {
+        public aiReturn aiGetMaterialIntegerArray(string pKey, aiTextureType type, int index, int* pOut, int* pMax) {
             Debug.Assert(pOut != null);
 
             aiMaterialProperty? prop;
