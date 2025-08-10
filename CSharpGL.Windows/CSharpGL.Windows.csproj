@@ -7,6 +7,13 @@
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<!-- 修改为目标版本前缀 -->
+		<VersionPrefix>1.9.0</VersionPrefix>
+		<!-- 可选：版本后缀（预发布标识） -->
+		<!--<VersionSuffix>preview</VersionSuffix>-->
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
 		<IsTrimmable>False</IsTrimmable>
 	</PropertyGroup>
