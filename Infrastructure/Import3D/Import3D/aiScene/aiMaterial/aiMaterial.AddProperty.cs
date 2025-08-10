@@ -13,12 +13,32 @@ namespace Import3D {
             Marshal.FreeHGlobal(str);
             return result;
         }
-        public aiReturn AddProperty<T>(T input, int pNumValues, string key, int type, int index)
+
+
+        public aiReturn AddProperty(mat4 input, int pNumValues, string key, int type, int index) {
+            return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Float);
+        }
+        public aiReturn AddProperty(vec4 input, int pNumValues, string key, int type, int index) {
+            return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Float);
+        }
+        public aiReturn AddProperty(vec3 input, int pNumValues, string key, int type, int index) {
+            return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Float);
+        }
+        public aiReturn AddProperty(double input, int pNumValues, string key, int type, int index) {
+            return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Double);
+        }
+        public aiReturn AddProperty(float input, int pNumValues, string key, int type, int index) {
+            return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Float);
+        }
+        public aiReturn AddProperty(int input, int pNumValues, string key, int type, int index) {
+            return AddProperty(input, pNumValues, key, type, index, aiPropertyTypeInfo.aiPTI_Integer);
+        }
+        public aiReturn AddProperty<T>(T input, int pNumValues, string key, int type, int index, aiPropertyTypeInfo propertyTypeInfo)
             where T : struct {
             var pin = GCHandle.Alloc(input, GCHandleType.Pinned);
             var addr = pin.AddrOfPinnedObject();
             var result = AddBinaryProperty((byte*)addr, pNumValues * Marshal.SizeOf<T>(),
-                key, type, index, aiPropertyTypeInfo.aiPTI_Integer);
+                key, type, index, propertyTypeInfo);
             pin.Free();
             return result;
         }
