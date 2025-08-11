@@ -135,12 +135,11 @@ namespace CSharpGL {
             var builder = new System.Text.StringBuilder();
             var cols = new vec4[] { col0, col1, col2, col3 };
             for (int i = 0; i < cols.Length; i++) {
-                builder.Append("col ");
-                builder.Append(i);
-                builder.Append(": [");
-                builder.Append(cols[i]);
-                builder.Append("] ");
-                builder.AppendLine();
+                builder.Append(cols[i].x); builder.Append(" ");
+                builder.Append(cols[i].y); builder.Append(" ");
+                builder.Append(cols[i].z); builder.Append(" ");
+                builder.Append(cols[i].w); builder.Append(" ");
+                builder.Append("; ");
             }
             return builder.ToString();
         }
