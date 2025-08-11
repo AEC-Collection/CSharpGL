@@ -520,9 +520,4 @@
 	  </None>
 	</ItemGroup>
 
-
-	<ItemGroup>
-	  <Folder Include="demoCodes\aiSceneModern\" />
-	</ItemGroup>
-
 </Project>
