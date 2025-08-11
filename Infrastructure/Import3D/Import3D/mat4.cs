@@ -10,6 +10,12 @@ namespace Import3D {
         /// </summary>
         public fixed float values[16];
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row">row index(0 - 3)</param>
+        /// <param name="column">column index(0 - 3)</param>
+        /// <returns></returns>
         public float this[int row, int column] {
             get { return this.values[row + column * 4]; }
             set { this.values[row + column * 4] = value; }
@@ -22,6 +28,8 @@ namespace Import3D {
             }
         }
 
+        //TODO: strange thing: in debug mode, this shows { 1 0 0 0 ; 0 0 0 0 ; 0 0 0 0 ; 0 0 0 0 }
+        // while this.ToString() shows 1 0 0 0 ; 0 1 0 0 ; 0 0 1 0 ; 0 0 0 1 ; 
         public override string ToString() {
             var builder = new StringBuilder();
             for (int row = 0; row < 4; row++) {
@@ -29,7 +37,8 @@ namespace Import3D {
                 for (int column = 0; column < 4; column++) {
                     if (first) { first = false; }
                     else { builder.Append(" "); }
-                    var value = this[row, column];
+                    //var value = this[row, column];
+                    var value = this.values[row + column * 4];
                     builder.Append(value);
                 }
                 builder.Append(" ; ");
