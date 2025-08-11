@@ -156,7 +156,7 @@ namespace CSharpGL {
             this.col0 = new vec4(scale, 0, 0, 0);
             this.col1 = new vec4(0, scale, 0, 0);
             this.col2 = new vec4(0, 0, scale, 0);
-            this.col3 = new vec4(0, 0, 0, scale);
+            this.col3 = new vec4(0, 0, 0, 1);
         }
 
         /// <summary>
