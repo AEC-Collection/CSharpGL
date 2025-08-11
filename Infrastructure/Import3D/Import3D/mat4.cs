@@ -25,14 +25,34 @@ namespace Import3D {
         public override string ToString() {
             var builder = new StringBuilder();
             for (int row = 0; row < 4; row++) {
+                var first = true;
                 for (int column = 0; column < 4; column++) {
+                    if (first) { first = false; }
+                    else { builder.Append(" "); }
                     var value = this[row, column];
                     builder.Append(value);
-                    builder.Append(", ");
                 }
-                builder.AppendLine();
+                builder.Append(" ; ");
             }
             return builder.ToString();
         }
+
+        //public string ToString2() {
+        //    var builder = new StringBuilder();
+        //    for (int i = 0; i < 16; i++) {
+        //        builder.Append(this.values[i]);
+        //        builder.Append(" ");
+        //        if (i % 4 == 3) { builder.Append("| "); }
+        //    }
+        //    //for (int row = 0; row < 4; row++) {
+        //    //    for (int column = 0; column < 4; column++) {
+        //    //        var value = this[row, column];
+        //    //        builder.Append(value);
+        //    //        builder.Append(", ");
+        //    //    }
+        //    //    builder.AppendLine();
+        //    //}
+        //    return builder.ToString();
+        //}
     }
 }
