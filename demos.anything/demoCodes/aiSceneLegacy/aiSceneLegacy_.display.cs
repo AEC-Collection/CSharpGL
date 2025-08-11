@@ -49,7 +49,7 @@ namespace aiSceneLegacy {
             gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f);
             gl.glRotatef(zrot, 0.0f, 0.0f, 1.0f);
 
-            recursive_render(gl, g_scene, g_scene.mRootNode, 0.5f);
+            RenderTree(gl, g_scene.mRootNode, scale: 0.5f, g_scene);
 
             yrot += 0.2f;
 
@@ -127,7 +127,7 @@ namespace aiSceneLegacy {
         }
 
 
-        void recursive_render(GL gl, aiScene scene, aiNode node, float scale) {
+        void RenderTree(GL gl, aiNode node, float scale, aiScene scene) {
             Import3D.mat4 m = node.mTransformation;
             CSharpGL.mat4* appear = (CSharpGL.mat4*)&m;
 
@@ -140,17 +140,17 @@ namespace aiSceneLegacy {
             gl.glMultMatrixf(m.values);
 
             // draw all meshes assigned to this node
-            RenderNode(gl, scene, node);
+            RenderMeshes(gl, scene, node);
 
             // draw all children
             for (var n = 0; n < node.mNumChildren; ++n) {
-                recursive_render(gl, scene, node.mChildren[n], scale);
+                RenderTree(gl, node.mChildren[n], scale, scene);
             }
 
             gl.glPopMatrix();
         }
 
-        private void RenderNode(GL gl, aiScene scene, aiNode node) {
+        private void RenderMeshes(GL gl, aiScene scene, aiNode node) {
             for (var n = 0; n < node.mNumMeshes; ++n) {
                 aiMesh mesh = scene.mMeshes[node.mMeshes[n]];
 
