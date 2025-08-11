@@ -50,6 +50,7 @@
 		<ProjectReference Include="..\CSharpGL.Windows\CSharpGL.Windows.csproj" />
 		<ProjectReference Include="..\CSharpGL\CSharpGL.csproj" />
 		<ProjectReference Include="..\Infrastructure\Import3D\Import3D.Obj\Import3D.Obj.csproj" />
+		<ProjectReference Include="..\Infrastructure\Import3D\Import3D.STL\Import3D.STL.csproj" />
 		<ProjectReference Include="..\Infrastructure\Import3D\Import3D\Import3D.csproj" />
 	</ItemGroup>
 

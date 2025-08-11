@@ -5,6 +5,8 @@ using System.Runtime.InteropServices;
 
 namespace Import3D {
     public unsafe partial class aiMaterial {
+        public const string DEFAULT_MATERIAL = "DefaultMaterial";
+
         public const int DefaultNumAllocated = 5;
 
         /// <summary>List of all material properties loaded.</summary>

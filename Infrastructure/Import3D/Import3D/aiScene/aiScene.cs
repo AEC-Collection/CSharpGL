@@ -27,7 +27,7 @@ namespace Import3D {
         public aiNode mRootNode;
 
         /// <summary> The number of meshes in the scene. </summary>
-        public uint mNumMeshes;
+        public int mNumMeshes;
 
         /// <summary> The array of meshes.
         /// 

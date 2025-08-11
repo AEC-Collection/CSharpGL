@@ -138,7 +138,7 @@ namespace Import3D.Obj {
             {
                 var parts = line.Split(separator, StringSplitOptions.RemoveEmptyEntries);
                 if (parts.Length >= 2) { name = parts[1]; }
-                else { name = ObjMaterial.DEFAULT_MATERIAL; }
+                else { name = aiMaterial.DEFAULT_MATERIAL; }
             }
 
             if (model.materialMap.TryGetValue(name, out var material)) {

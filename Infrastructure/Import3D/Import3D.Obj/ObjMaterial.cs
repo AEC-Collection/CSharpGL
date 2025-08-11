@@ -2,7 +2,6 @@
 
 namespace Import3D.Obj {
     public class ObjMaterial {
-        public const string DEFAULT_MATERIAL = "DefaultMaterial";
 
         public readonly string materialName;
 
@@ -90,7 +89,7 @@ namespace Import3D.Obj {
         public float anisotropy;
         public float bump_multiplier = 1.0f;
 
-        public ObjMaterial() : this(DEFAULT_MATERIAL) { }
+        public ObjMaterial() : this(aiMaterial.DEFAULT_MATERIAL) { }
 
         public ObjMaterial(string name) {
             this.materialName = name;

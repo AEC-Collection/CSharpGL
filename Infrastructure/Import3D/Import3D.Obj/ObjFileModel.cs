@@ -24,8 +24,8 @@
 
         public ObjFileModel(string modelName) {
             this.modelName = modelName;
-            this.materialLib.Add(ObjMaterial.DEFAULT_MATERIAL);
-            this.materialMap.Add(ObjMaterial.DEFAULT_MATERIAL, this.defaultMaterial);
+            this.materialLib.Add(aiMaterial.DEFAULT_MATERIAL);
+            this.materialMap.Add(aiMaterial.DEFAULT_MATERIAL, this.defaultMaterial);
         }
     }
 }

@@ -336,7 +336,7 @@ namespace Import3D.Obj {
                 pNode.mNumMeshes = meshSizeDiff;
                 var index = 0;
                 for (var i = oldMeshSize; i < MeshArray.Count; ++i) {
-                    pNode.mMeshes[index] = pScene.mNumMeshes;
+                    pNode.mMeshes[index] = (uint)pScene.mNumMeshes;
                     pScene.mNumMeshes++;
                     ++index;
                 }
