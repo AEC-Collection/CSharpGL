@@ -389,11 +389,12 @@ namespace Import3D.STL {
             pMesh.mFaces = new aiFace[pMesh.mNumFaces];
             for (int i = 0, p = 0; i < pMesh.mNumFaces; ++i) {
                 var face = pMesh.mFaces[i];
-                var indices = new int[face.mNumIndices = 3];
+                face.mNumIndices = 3;
+                face.mIndices = new int[3];
                 for (int o = 0; o < 3; ++o, ++p) {
-                    indices[o] = p;
+                    face.mIndices[o] = p;
                 }
-                pMesh.mFaces[i].mIndices = indices;
+                pMesh.mFaces[i] = face;
             }
 
         }
