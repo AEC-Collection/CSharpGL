@@ -43,7 +43,7 @@ namespace aiSceneSTL {
 
             /* XXX docs say all polygons are emitted CCW, but tests show that some aren't. */
             //if (getenv("MODEL_IS_BROKEN"))
-            //gl.glFrontFace(GL.GL_CW);
+            gl.glFrontFace(GL.GL_CW);
 
             gl.glColorMaterial(GL.GL_FRONT_AND_BACK, GL.GL_DIFFUSE);
 
