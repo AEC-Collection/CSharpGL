@@ -31,7 +31,7 @@ namespace aiSceneSTL {
                 //return;// EXIT_FAILURE;
             }
 
-            gl.glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+            //gl.glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 
             gl.glEnable(GL.GL_LIGHTING);
             gl.glEnable(GL.GL_LIGHT0); /* Uses default lighting parameters */

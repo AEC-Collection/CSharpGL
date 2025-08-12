@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Xml;
 
 namespace demos.anything {
-    public unsafe partial class FormAnything: Form {
+    public unsafe partial class FormAnything : Form {
 
         public FormAnything() {
             InitializeComponent();
@@ -19,6 +19,7 @@ namespace demos.anything {
             var baseType = typeof(demoCode);
             var instanceTypes = from item in Assembly.GetExecutingAssembly().GetTypes()
                                 where item.BaseType == baseType
+                                orderby item.Name ascending
                                 select item;
             foreach (var item in instanceTypes) {
                 this.listBox1.Items.Add(new NameType(item.Name, item));
