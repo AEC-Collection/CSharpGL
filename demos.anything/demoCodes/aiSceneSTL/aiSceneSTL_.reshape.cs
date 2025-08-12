@@ -29,7 +29,7 @@ namespace aiSceneSTL {
             gl.glMatrixMode(GL.GL_PROJECTION);
             gl.glLoadIdentity();
 
-            CSharpGL.mat4 projection = glm.perspective(fieldOfView, aspectRatio, 1.0f, 1000.0f);
+            CSharpGL.mat4 projection = glm.perspective(fieldOfView, aspectRatio, 0.1f, 1000.0f);
             var array = (projection).ToArray();
             fixed (GLfloat* p = array) {
                 gl.glMultMatrixf(p);

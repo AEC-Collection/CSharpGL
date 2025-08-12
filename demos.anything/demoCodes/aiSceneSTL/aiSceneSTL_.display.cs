@@ -40,13 +40,18 @@ namespace aiSceneSTL {
 
             gl.glMatrixMode(GL.GL_MODELVIEW);
             gl.glLoadIdentity();
+
             //gl.gluLookAt(0.f, 0.f, 3.f, 0.f, 0.f, -5.f, 0.f, 1.f, 0.f);
-            var view = CSharpGL.glm.lookAt(new CSharpGL.vec3(0, 0, 3), new CSharpGL.vec3(0, 0, -5), new CSharpGL.vec3(0, 1, 0));
+            var view = CSharpGL.glm.lookAt(new CSharpGL.vec3(0, 1, 0), new CSharpGL.vec3(0, 0, 0), new CSharpGL.vec3(1, 0, 0));
             var array = view.ToArray();
             fixed (float* p = array) { gl.glMultMatrixf(p); }
 
-            /* rotate it around the y axis */
+            //gl.glTranslatef(0.0f, 0.0f, 40.0f); // Move 40 Units And Into The Screen
+            gl.glRotatef(90, 0.0f, 0.0f, 1.0f);
             gl.glRotatef(angle, 0.0f, 1.0f, 0.0f);
+            gl.glRotatef(90, 1.0f, 0.0f, 0.0f);
+            angle += 1.0f;
+
 
             /* scale the whole asset to fit into our view frustum */
             tmp = scene_max.x - scene_min.x;
