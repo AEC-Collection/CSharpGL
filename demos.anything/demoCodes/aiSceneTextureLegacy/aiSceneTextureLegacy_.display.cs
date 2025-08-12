@@ -32,7 +32,7 @@ namespace aiSceneLegacy {
         Import3D.vec3 scene_min, scene_max, scene_center;
         Dictionary<string, uint> textureIdMap = new();// map image filenames to textureId
         GLuint[] textureIds;                         // pointer to texture Array
-        static string modelpath = "media/obj-spider/spider.obj.txt";
+        static string modelpath = "media/STL-models/Spider_ascii.stl";
         GLfloat xrot;
         GLfloat yrot;
         GLfloat zrot;

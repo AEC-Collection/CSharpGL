@@ -8,17 +8,17 @@ namespace Import3D.STL {
 
         // Imports the given file into the given scene structure.
         public static void InternReadFile(string pFile, aiScene scene) {
-            var file = new FileStream(pFile, FileMode.Open, FileAccess.Read);
 
             var color = new vec4(1.0f);
 
-            if (IsBinarySTL(file)) {
+            if (IsBinarySTL(pFile)) {
+                var file = new FileStream(pFile, FileMode.Open, FileAccess.Read);
                 var context = new BinContext(file, scene);
                 var bMatClr = LoadBinaryFile(context);
                 if (bMatClr) { color = context.mClrColorDefault; }
                 file.Dispose();
             }
-            else if (IsAsciiSTL(file)) {
+            else if (IsAsciiSTL(pFile)) {
 
                 //var fullText = File.ReadAllText(pFile);
                 //var separator = new char[] { ' ', '\t', '\r', '\n', '\f' };
@@ -26,7 +26,6 @@ namespace Import3D.STL {
                 var context = new AsciiContext(pFile, scene);
 
                 LoadASCIIFile(context);
-                file.Dispose();
             }
             else {
                 throw new Exception($"Failed to determine STL storage representation for {pFile}");
@@ -107,9 +106,9 @@ namespace Import3D.STL {
                         }
                         else {
                             var position = new vec3(
+                                float.Parse(parts[1]),
                                 float.Parse(parts[2]),
-                                float.Parse(parts[3]),
-                                float.Parse(parts[4])
+                                float.Parse(parts[3])
                                 );
                             positionBuffer.Add(position);
                             faceVertexCounter++;
@@ -180,32 +179,41 @@ namespace Import3D.STL {
         // An ascii STL buffer will begin with "solid NAME", where NAME is optional.
         // Note: The "solid NAME" check is necessary, but not sufficient, to determine
         // if the buffer is ASCII; a binary header could also begin with "solid NAME".
-        private static bool IsAsciiSTL(FileStream file) {
-            if (!SkipSpaces(file, file.Length)) {
-                return false;
-            }
-
-            if (file.Position + 5 >= file.Length) {
-                return false;
-            }
-
-            var bytes = stackalloc byte[5];
-            file.ReadExactly(new Span<byte>(bytes, 5));
-            bool isASCII = Import3D.Utility.strncmp(bytes, "solid", 5) == 0;
-            if (isASCII) {
-                // A lot of importers are write solid even if the file is binary. So we have to check for ASCII-characters.
-                var pos = file.Position;
-                while (file.Position < file.Length) {
-                    var b = file.ReadByte();
-                    if (b > UnicodeBoundary) {
-                        isASCII = false;
-                        break;
+        private static bool IsAsciiSTL(string filename) {
+            using (var file = new FileStream(filename, FileMode.Open, FileAccess.Read)) {
+                var bytes = stackalloc byte[5];
+                // skip spaces
+                {
+                    int b = 0;
+                    while (file.Position < file.Length) {
+                        b = file.ReadByte();
+                        if (b != ' ' && b != '\t' && b != '\r' && b != '\n' && b != '\f') { break; }
+                        if (b < 0) { break; }
                     }
-                }
-                file.Position = pos;
-            }
-            return isASCII;
 
+                    if (file.Position + 4 >= file.Length) {
+                        return false;
+                    }
+
+                    bytes[0] = (byte)b;
+                }
+
+                file.ReadExactly(new Span<byte>(bytes + 1, 4));
+                bool isASCII = Import3D.Utility.strncmp(bytes, "solid", 5) == 0;
+                if (isASCII) {
+                    // A lot of importers are write solid even if the file is binary. So we have to check for ASCII-characters.
+                    var pos = file.Position;
+                    while (file.Position < file.Length) {
+                        var b = file.ReadByte();
+                        if (b > UnicodeBoundary) {
+                            isASCII = false;
+                            break;
+                        }
+                    }
+                    file.Position = pos;
+                }
+                return isASCII;
+            }
         }
 
 
@@ -394,21 +402,21 @@ namespace Import3D.STL {
         // 1) 80 byte header
         // 2) 4 byte face count
         // 3) 50 bytes per face
-        private static unsafe bool IsBinarySTL(FileStream file) {
+        private static unsafe bool IsBinarySTL(string filename) {
+            using (var file = new FileStream(filename, FileMode.Open, FileAccess.Read)) {
+                if (file.Length < 84) {
+                    return false;
+                }
 
-            if (file.Length < 84) {
-                return false;
+                var pos = file.Position;
+                file.Position = 80;
+                UInt32 faceCount = 0;
+                var span = new Span<byte>(&faceCount, sizeof(UInt32));
+                file.ReadExactly(span);
+                var expectedBinaryFileSize = faceCount * 50 + 84;
+
+                return expectedBinaryFileSize == file.Length;
             }
-
-            var pos = file.Position;
-            file.Position = 80;
-            UInt32 faceCount = 0;
-            var span = new Span<byte>(&faceCount, sizeof(UInt32));
-            file.ReadExactly(span);
-            var expectedBinaryFileSize = faceCount * 50 + 84;
-
-            return expectedBinaryFileSize == file.Length;
-
         }
     }
 }
