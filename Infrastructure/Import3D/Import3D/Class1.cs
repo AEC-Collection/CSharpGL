@@ -1,7 +1,5 @@
-﻿namespace Import3D
-{
-    public class Class1
-    {
+﻿namespace Import3D {
+    public class Class1 {
 
     }
 }
