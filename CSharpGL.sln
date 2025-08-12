@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForm", "Infrastructure\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import3D.STL", "Infrastructure\Import3D\Import3D.STL\Import3D.STL.csproj", "{CDEA4CC2-4AEB-4A22-A668-89ED76C8A873}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import3D.FBX", "Infrastructure\Import3D\Import3D.FBX\Import3D.FBX\Import3D.FBX.csproj", "{A45006FE-4500-4085-B9A4-6A80811EADEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,10 @@ Global
 		{CDEA4CC2-4AEB-4A22-A668-89ED76C8A873}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDEA4CC2-4AEB-4A22-A668-89ED76C8A873}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDEA4CC2-4AEB-4A22-A668-89ED76C8A873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45006FE-4500-4085-B9A4-6A80811EADEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45006FE-4500-4085-B9A4-6A80811EADEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45006FE-4500-4085-B9A4-6A80811EADEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45006FE-4500-4085-B9A4-6A80811EADEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -149,6 +155,7 @@ Global
 		{223BFFD8-09E4-9E29-C943-E7DB649E4D9C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{BA4F3875-8429-B698-6209-FEAE7154CEC4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{CDEA4CC2-4AEB-4A22-A668-89ED76C8A873} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A45006FE-4500-4085-B9A4-6A80811EADEB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E06AFF7F-B75D-4D96-855A-106CD62C336D}
