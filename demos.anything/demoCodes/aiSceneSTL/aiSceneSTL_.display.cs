@@ -63,19 +63,21 @@ namespace aiSceneSTL {
             /* center the model */
             gl.glTranslatef(-scene_center.x, -scene_center.y, -scene_center.z);
 
-            /* if the display list has not been made yet, create a new one and
-               fill it with scene contents */
-            if (scene_list == 0) {
-                scene_list = gl.glGenLists(1);
-                gl.glNewList(scene_list, GL.GL_COMPILE);
-                /* now begin at the root node of the imported data and traverse
-                   the scenegraph by multiplying subsequent local transforms
-                   together on GL's matrix stack. */
-                recursive_render(gl, scene, scene.mRootNode);
-                gl.glEndList();
-            }
+            ///* if the display list has not been made yet, create a new one and
+            //   fill it with scene contents */
+            //if (scene_list == 0) {
+            //    scene_list = gl.glGenLists(1);
+            //    gl.glNewList(scene_list, GL.GL_COMPILE);
+            //    /* now begin at the root node of the imported data and traverse
+            //       the scenegraph by multiplying subsequent local transforms
+            //       together on GL's matrix stack. */
+            //    recursive_render(gl, scene, scene.mRootNode);
+            //    gl.glEndList();
+            //}
 
-            gl.glCallList(scene_list);
+            //gl.glCallList(scene_list);
+            recursive_render(gl, scene, scene.mRootNode);
+
 
             //gl.glutSwapBuffers();
 
@@ -142,10 +144,12 @@ namespace aiSceneSTL {
             }
 
             max = 1;
-            if (aiReturn.aiReturn_SUCCESS == material.aiGetMaterialIntegerArray(/*AI_MATKEY_ENABLE_WIREFRAME*/"$mat.wireframe", 0, 0, &wireframe, &max))
+            if (aiReturn.aiReturn_SUCCESS == material.aiGetMaterialIntegerArray(/*AI_MATKEY_ENABLE_WIREFRAME*/"$mat.wireframe", 0, 0, &wireframe, &max)) {
                 fill_mode = wireframe != 0 ? GL.GL_LINE : GL.GL_FILL;
-            else
-                fill_mode = GL.GL_FILL;
+            }
+            else {
+                fill_mode = /*GL.GL_FILL*/polygonModes[polygonModeIndex];
+            }
             gl.glPolygonMode(GL.GL_FRONT_AND_BACK, fill_mode);
 
             max = 1;
