@@ -1,5 +1,5 @@
 ﻿namespace Import3D {
-    public unsafe class Utility {
+    public unsafe partial class Utility {
         public static int strncmp(byte* left, string right) {
             return strncmp(left, right, right.Length);
         }

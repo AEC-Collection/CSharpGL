@@ -62,11 +62,11 @@ namespace Import3D {
                 Debug.Assert(prop.mDataLength >= 5);
                 Debug.Assert(0 != prop.mData[prop.mDataLength - 1]);
                 for (var a = 0; ; ++a) {
-                    pOut[a] = strtol10(cur, &cur);
+                    pOut[a] = Utility.strtol10(cur, &cur);
                     if (a == iWrite - 1) {
                         break;
                     }
-                    if (!IsSpace(*cur)) {
+                    if (!Utility.IsSpace(*cur)) {
                         Log.WriteLine($"Material property {pKey} is a string; failed to parse an integer array out of it.");
                         return aiReturn.aiReturn_FAILURE;
                     }

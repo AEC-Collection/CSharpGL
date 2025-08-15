@@ -4,8 +4,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Import3D {
-    unsafe partial class aiMaterial {
-        private static byte* fast_atoreal_move(byte* cur, float outValue, bool check_comma = true) {
+    unsafe partial class Utility {
+        public static byte* fast_atoreal_move(byte* cur, float outValue, bool check_comma = true) {
             float f = 0;
 
             bool inv = (*cur == '-');
@@ -113,7 +113,7 @@ namespace Import3D {
         // Special version of the function, providing higher accuracy and safety
         // It is mainly used by fast_atof to prevent ugly and unwanted integer overflows.
         // ------------------------------------------------------------------------------------
-        static UInt64 strtoul10_64(byte* inValue, byte** outValue = null, int* max_inout = null) {
+        public static UInt64 strtoul10_64(byte* inValue, byte** outValue = null, int* max_inout = null) {
             int cur = 0;
             UInt64 value = 0;
 
@@ -163,7 +163,7 @@ namespace Import3D {
 
         }
 
-        static int ASSIMP_strincmp(byte* s1, string s2, int n) {
+        public static int ASSIMP_strincmp(byte* s1, string s2, int n) {
             Debug.Assert(null != s1);
             Debug.Assert(null != s2);
             if (n == 0) {
@@ -192,7 +192,7 @@ namespace Import3D {
          *  @param n Maximum number of characters to compare
          *  @return 0 if the given strings are identical
          */
-        static int ASSIMP_strincmp(byte* s1, byte* s2, int n) {
+        public static int ASSIMP_strincmp(byte* s1, byte* s2, int n) {
             Debug.Assert(null != s1);
             Debug.Assert(null != s2);
             if (n == 0) {
@@ -209,14 +209,14 @@ namespace Import3D {
 
             return c1 - c2;
         }
-        private static bool IsSpace(byte v) {
+        public static bool IsSpace(byte v) {
             return v == ' ' || v == '\t';
         }
 
         // ------------------------------------------------------------------------------------
         // signed variant of strtoul10
         // ------------------------------------------------------------------------------------
-        static int strtol10(byte* inValue, byte** outValue = null) {
+        public static int strtol10(byte* inValue, byte** outValue = null) {
             bool inv = (*inValue == '-');
             if (inv || *inValue == '+') {
                 ++inValue;
@@ -237,7 +237,7 @@ namespace Import3D {
         // ------------------------------------------------------------------------------------
         // Convert a string in decimal format to a number
         // ------------------------------------------------------------------------------------
-        static int strtoul10(byte* inValue, byte** outValue = null) {
+        public static int strtoul10(byte* inValue, byte** outValue = null) {
             int value = 0;
 
             for (; ; ) {
