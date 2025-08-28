@@ -30,18 +30,18 @@
         /// surrounded by @verbatim &lt;&gt; @endverbatim e.g.
         ///  @verbatim&lt;DummyRootNode&gt; @endverbatim.
         /// </summary>
-        public string mName;
+        public string? mName;
 
         /// <summary>The transformation relative to the node's parent. /// </summary>
         public mat4 mTransformation = new mat4();
 
-        /// <summary>Parent node. nullptr if this node is the root node. /// </summary>
+        /// <summary>Parent node. null if this node is the root node. /// </summary>
         public aiNode? mParent;
 
         /// <summary>The number of child nodes of this node. /// </summary>
         public int mNumChildren;
 
-        /// <summary>The child nodes of this node. nullptr if mNumChildren is 0. /// </summary>
+        /// <summary>The child nodes of this node. null if mNumChildren is 0. /// </summary>
         public aiNode[]? mChildren;
 
         /// <summary>The number of meshes of this node. /// </summary>
@@ -52,7 +52,7 @@
         /// </summary>
         public uint[]? mMeshes;
 
-        /// <summary>Metadata associated with this node or nullptr if there is no metadata.
+        /// <summary>Metadata associated with this node or null if there is no metadata.
         ///  Whether any metadata is generated depends on the source file format. See the
         /// @link importer_notes @endlink page for more information on every source file
         /// format. Importers that don't document any metadata don't write any.

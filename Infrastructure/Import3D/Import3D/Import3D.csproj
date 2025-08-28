@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Compression.cs" />
+    <Compile Remove="deflate_state.cs" />
+    <Compile Remove="z_stream.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="mat4.cs" />
   </ItemGroup>
 

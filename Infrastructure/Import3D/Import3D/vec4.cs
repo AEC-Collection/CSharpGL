@@ -1,5 +1,6 @@
-﻿namespace Import3D {
-    public struct vec4 {
+﻿
+namespace Import3D {
+    public struct vec4 : IEquatable<vec4> {
         public float x;
         public float y;
         public float z;
@@ -21,9 +22,31 @@
             this.z = z;
             this.w = w;
         }
-
         public override string ToString() {
             return $"{x}, {y}, {z}, {w}";
+        }
+
+        public override bool Equals(object? obj) {
+            return obj is vec4 vec && Equals(vec);
+        }
+
+        public bool Equals(vec4 other) {
+            return x == other.x &&
+                   y == other.y &&
+                   z == other.z &&
+                   w == other.w;
+        }
+
+        public override int GetHashCode() {
+            return HashCode.Combine(x, y, z, w);
+        }
+
+        public static bool operator ==(vec4 left, vec4 right) {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(vec4 left, vec4 right) {
+            return !(left == right);
         }
     }
 }

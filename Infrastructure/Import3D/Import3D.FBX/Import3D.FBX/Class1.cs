@@ -1,5 +1,5 @@
 ﻿namespace Import3D.FBX {
-    public class Class1 {
+    public unsafe class TypedProperty {
 
     }
 }

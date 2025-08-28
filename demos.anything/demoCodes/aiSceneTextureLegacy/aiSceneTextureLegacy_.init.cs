@@ -137,7 +137,7 @@ namespace aiSceneLegacy {
                 //}
                 //else {
                 //    /* Error occurred */
-                //    //const std::string message = "Couldn't load Image: " + fileloc;
+                //    //const string message = "Couldn't load Image: " + fileloc;
                 //    //std::wstring targetMessage;
                 //    //wchar_t* tmp = new wchar_t[message.size() + 1];
                 //    //memset(tmp, L'\0', sizeof(wchar_t) * (message.size() + 1));

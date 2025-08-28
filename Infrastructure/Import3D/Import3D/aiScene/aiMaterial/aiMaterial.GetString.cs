@@ -18,7 +18,7 @@ namespace Import3D {
                 Debug.Assert(prop.mDataLength >= 5);
 
                 // The string is stored as 32 but length prefix followed by zero-terminated UTF8 data
-                //pOut.length = static_cast < unsigned int> (*reinterpret_cast<uint32_t*>(prop.mData));
+                //pOut.length = static_cast < uint> (*reinterpret_cast<uint32_t*>(prop.mData));
 
                 //ai_assert(pOut.length + 1 + 4 == prop.mDataLength);
                 //ai_assert(!prop.mData[prop.mDataLength - 1]);

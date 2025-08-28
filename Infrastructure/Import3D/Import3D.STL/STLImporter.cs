@@ -310,7 +310,7 @@ namespace Import3D.STL {
                 theVec.x = binaryReader.ReadSingle();
                 theVec.y = binaryReader.ReadSingle();
                 theVec.z = binaryReader.ReadSingle();
-                //::memcpy(&theVec3F, theVec, sizeof(aiVector3f));
+                ////todo: ::memcpy(&theVec3F, theVec, sizeof(aiVector3f));
                 vn[vnIndex++] = theVec; vn[vnIndex++] = theVec; vn[vnIndex++] = theVec;
 
                 // vertex 1 2 3
@@ -318,7 +318,7 @@ namespace Import3D.STL {
                     theVec.x = binaryReader.ReadSingle();
                     theVec.y = binaryReader.ReadSingle();
                     theVec.z = binaryReader.ReadSingle();
-                    //::memcpy(&theVec3F, theVec, sizeof(aiVector3f));
+                    ////todo: ::memcpy(&theVec3F, theVec, sizeof(aiVector3f));
                     vp[vnIndex++] = theVec;
                 }
                 //sz = (char*)theVec;

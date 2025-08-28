@@ -54,7 +54,7 @@ namespace Import3D {
         /// <summary>
         /// @brief Vertex normals.
         ///
-        /// The array contains normalized vectors, nullptr if not present.
+        /// The array contains normalized vectors, null if not present.
         /// The array is mNumVertices in size. Normals are undefined for
         /// point and line primitives. A mesh consisting of points and
         /// lines only may not have normal vectors. Meshes with mixed
@@ -79,7 +79,7 @@ namespace Import3D {
         /// @brief Vertex tangents.
         ///
         /// The tangent of a vertex points in the direction of the positive
-        /// X texture axis. The array contains normalized vectors, nullptr if
+        /// X texture axis. The array contains normalized vectors, null if
         /// not present. The array is mNumVertices in size. A mesh consisting
         /// of points and lines only may not have normal vectors. Meshes with
         /// mixed primitive types (i.e. lines and triangles) may have
@@ -95,7 +95,7 @@ namespace Import3D {
         /// @brief Vertex bitangents.
         ///
         /// The bitangent of a vertex points in the direction of the positive
-        /// Y texture axis. The array contains normalized vectors, nullptr if not
+        /// Y texture axis. The array contains normalized vectors, null if not
         /// present. The array is mNumVertices in size.
         /// @note If the mesh contains tangents, it automatically also contains
         /// bitangents.
@@ -106,7 +106,7 @@ namespace Import3D {
         /// @brief Vertex color sets.
         ///
         /// A mesh may contain 0 to #AI_MAX_NUMBER_OF_COLOR_SETS vertex
-        /// colors per vertex. nullptr if not present. Each array is
+        /// colors per vertex. null if not present. Each array is
         /// mNumVertices in size if present.
         /// </summary>
         public vec4[][] mColors = new vec4[/*AI_MAX_NUMBER_OF_COLOR_SETS*/0x8][];
@@ -115,7 +115,7 @@ namespace Import3D {
         /// @brief Vertex texture coordinates, also known as UV channels.
         ///
         /// A mesh may contain 0 to AI_MAX_NUMBER_OF_TEXTURECOORDS channels per
-        /// vertex. Used and unused (nullptr) channels may go in any order.
+        /// vertex. Used and unused (null) channels may go in any order.
         /// The array is mNumVertices in size.
         /// </summary>
         public vec3[][] mTextureCoords = new vec3[/*AI_MAX_NUMBER_OF_TEXTURECOORDS*/0x8][];
@@ -142,7 +142,7 @@ namespace Import3D {
         public aiFace[]? mFaces;
 
         /// <summary>
-        /// The number of bones this mesh contains. Can be 0, in which case the mBones array is nullptr.
+        /// The number of bones this mesh contains. Can be 0, in which case the mBones array is null.
         /// </summary>
         public uint mNumBones;
 

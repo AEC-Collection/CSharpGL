@@ -1,10 +1,11 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 
 namespace Import3D {
     /// <summary>
     /// column-major matrix4x4
     /// </summary>
-    public unsafe struct mat4 {
+    public unsafe struct mat4 : IEquatable<mat4> {
         /// <summary>
         /// column-major matrix4x4
         /// </summary>
@@ -44,6 +45,33 @@ namespace Import3D {
                 builder.Append(" ; ");
             }
             return builder.ToString();
+        }
+
+        public override bool Equals(object? obj) {
+            return obj is mat4 mat && Equals(mat);
+        }
+
+        public bool Equals(mat4 other) {
+            //return EqualityComparer<float*>.Default.Equals(values, other.values);
+            for (int i = 0; i < 16; i++) {
+                if (this.values[i] != other.values[i]) { return false; }
+            }
+            return true;
+        }
+
+        public override int GetHashCode() {
+            return
+                HashCode.Combine(
+                HashCode.Combine(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7]),
+                HashCode.Combine(values[8], values[9], values[10], values[11], values[12], values[13], values[14], values[15]));
+        }
+
+        public static bool operator ==(mat4 left, mat4 right) {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(mat4 left, mat4 right) {
+            return !(left == right);
         }
 
         //public string ToString2() {
