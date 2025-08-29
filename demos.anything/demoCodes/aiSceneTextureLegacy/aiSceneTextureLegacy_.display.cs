@@ -196,7 +196,7 @@ namespace aiSceneLegacy {
         private static void RenderFace(GL gl, aiMesh mesh, aiFace face) {
             for (var i = 0; i < face.mNumIndices; i++)     // go through all vertices in face
             {
-                int vertexIndex = face.mIndices[i];    // get group index for current index
+                var vertexIndex = face.mIndices[i];    // get group index for current index
                 if (mesh.mColors[0] != null) {
                     var color = mesh.mColors[0][vertexIndex];
                     gl.glColor4fv((float*)&color);

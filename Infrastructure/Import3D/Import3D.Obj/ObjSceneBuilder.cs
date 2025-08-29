@@ -409,7 +409,7 @@ namespace Import3D.Obj {
                             var f = pMesh.mFaces[outIndex++];
                             f.mNumIndices = 2;
                             uiIdxCount += f.mNumIndices;
-                            f.mIndices = new int[2];
+                            f.mIndices = new uint[2];
                         }
                         continue;
                     }
@@ -418,7 +418,7 @@ namespace Import3D.Obj {
                             aiFace f = pMesh.mFaces[outIndex++];
                             f.mNumIndices = 1;
                             uiIdxCount += f.mNumIndices;
-                            f.mIndices = new int[1];
+                            f.mIndices = new uint[1];
                         }
                         continue;
                     }
@@ -439,7 +439,7 @@ namespace Import3D.Obj {
                         pMesh.mFaces[outIndex].mNumIndices = uiNumIndices;
                         uiIdxCount += uiNumIndices;
                         if (uiNumIndices > 0) {
-                            pMesh.mFaces[outIndex].mIndices = new int[uiNumIndices];
+                            pMesh.mFaces[outIndex].mIndices = new uint[uiNumIndices];
                         }
                         outIndex++;
                     }
@@ -547,7 +547,7 @@ namespace Import3D.Obj {
 
                     bool last = (vertexIndex == sourceFace.m_vertices.Count - 1);
                     if (sourceFace.mPrimitiveType != aiPrimitiveType.aiPrimitiveType_LINE || !last) {
-                        pDestFace.mIndices[outVertexIndex] = newIndex;
+                        pDestFace.mIndices[outVertexIndex] = (uint)newIndex;
                         outVertexIndex++;
                     }
 
@@ -580,7 +580,7 @@ namespace Import3D.Obj {
                             }
 
                             //pDestFace[-1].mIndices[1] = newIndex;
-                            pMesh.mFaces[destFaceIndex - 1].mIndices[1] = newIndex;
+                            pMesh.mFaces[destFaceIndex - 1].mIndices[1] = (uint)newIndex;
                         }
                     }
                     else if (last) {

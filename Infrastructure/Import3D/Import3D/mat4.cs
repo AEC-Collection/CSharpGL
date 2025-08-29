@@ -5,7 +5,7 @@ namespace Import3D {
     /// <summary>
     /// column-major matrix4x4
     /// </summary>
-    public unsafe struct mat4 : IEquatable<mat4> {
+    public unsafe partial struct mat4 : IEquatable<mat4> {
         /// <summary>
         /// column-major matrix4x4
         /// </summary>
@@ -27,6 +27,29 @@ namespace Import3D {
             for (int i = 0; i < 4; i++) {
                 values[i * 5] = 1.0f;
             }
+        }
+
+        public mat4(vec4 col0, vec4 col1, vec4 col2, vec4 col3) {
+            this.values[0 + 0 * 4] = col0.x;
+            this.values[1 + 0 * 4] = col0.y;
+            this.values[2 + 0 * 4] = col0.z;
+            this.values[3 + 0 * 4] = col0.w;
+
+            this.values[0 + 1 * 4] = col1.x;
+            this.values[1 + 1 * 4] = col1.y;
+            this.values[2 + 1 * 4] = col1.z;
+            this.values[3 + 1 * 4] = col1.w;
+
+            this.values[0 + 2 * 4] = col2.x;
+            this.values[1 + 2 * 4] = col2.y;
+            this.values[2 + 2 * 4] = col2.z;
+            this.values[3 + 2 * 4] = col2.w;
+
+            this.values[0 + 3 * 4] = col3.x;
+            this.values[1 + 3 * 4] = col3.y;
+            this.values[2 + 3 * 4] = col3.z;
+            this.values[3 + 3 * 4] = col3.w;
+
         }
 
         //TODO: strange thing: in debug mode, this shows { 1 0 0 0 ; 0 0 0 0 ; 0 0 0 0 ; 0 0 0 0 }
@@ -91,5 +114,6 @@ namespace Import3D {
         //    //}
         //    return builder.ToString();
         //}
+
     }
 }

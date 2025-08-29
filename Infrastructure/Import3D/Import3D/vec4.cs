@@ -1,6 +1,6 @@
 ﻿
 namespace Import3D {
-    public struct vec4 : IEquatable<vec4> {
+    public partial struct vec4 : IEquatable<vec4> {
         public float x;
         public float y;
         public float z;

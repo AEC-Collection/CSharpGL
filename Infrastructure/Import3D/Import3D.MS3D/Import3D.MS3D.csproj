@@ -8,9 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Compression.cs" />
-    <Compile Remove="deflate_state.cs" />
-    <Compile Remove="z_stream.cs" />
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Import3D\Import3D.csproj" />
   </ItemGroup>
 
 </Project>

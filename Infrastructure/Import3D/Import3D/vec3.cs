@@ -1,4 +1,6 @@
 ﻿
+using System.Reflection.Metadata.Ecma335;
+
 namespace Import3D {
     public struct vec3 : IEquatable<vec3> {
         public float x;
@@ -40,6 +42,16 @@ namespace Import3D {
 
         public static bool operator !=(vec3 left, vec3 right) {
             return !(left == right);
+        }
+
+        public vec3 Normalize() {
+            var length = (float)Math.Sqrt(x * x + y * y + z * z);
+
+            return new vec3(x / length, y / length, z / length);
+        }
+
+        public static vec3 operator +(vec3 left, vec3 right) {
+            return new vec3(left.x + right.x, left.y + right.y, left.z + right.z);
         }
     }
 }

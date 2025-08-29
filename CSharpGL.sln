@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import3D.STL", "Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import3D.FBX", "Infrastructure\Import3D\Import3D.FBX\Import3D.FBX\Import3D.FBX.csproj", "{A45006FE-4500-4085-B9A4-6A80811EADEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import3D.MS3D", "Infrastructure\Import3D\Import3D.MS3D\Import3D.MS3D.csproj", "{FC949BB8-84BF-4E78-B05F-A84811B151CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,10 @@ Global
 		{A45006FE-4500-4085-B9A4-6A80811EADEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A45006FE-4500-4085-B9A4-6A80811EADEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A45006FE-4500-4085-B9A4-6A80811EADEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC949BB8-84BF-4E78-B05F-A84811B151CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC949BB8-84BF-4E78-B05F-A84811B151CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC949BB8-84BF-4E78-B05F-A84811B151CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC949BB8-84BF-4E78-B05F-A84811B151CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +162,7 @@ Global
 		{BA4F3875-8429-B698-6209-FEAE7154CEC4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{CDEA4CC2-4AEB-4A22-A668-89ED76C8A873} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{A45006FE-4500-4085-B9A4-6A80811EADEB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{FC949BB8-84BF-4E78-B05F-A84811B151CB} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E06AFF7F-B75D-4D96-855A-106CD62C336D}

@@ -29,6 +29,6 @@
 
         /// <summary> Pointer to the indices array. Size of the array is given in numIndices.
         /// </summary>
-        public int[] mIndices;
+        public uint[] mIndices;
     }
 }

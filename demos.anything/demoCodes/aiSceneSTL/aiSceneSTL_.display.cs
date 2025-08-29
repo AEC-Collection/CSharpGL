@@ -195,7 +195,7 @@ namespace aiSceneSTL {
                     gl.glBegin(face_mode);
 
                     for (var i = 0; i < face.mNumIndices; i++) {
-                        int index = face.mIndices[i];
+                        var index = face.mIndices[i];
                         if (mesh.mColors[0] != null) {
                             var color = mesh.mColors[0][index];
                             gl.glColor4fv((float*)&color);
