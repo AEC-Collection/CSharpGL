@@ -428,38 +428,38 @@ namespace Import3D.MS3D {
                 pScene.mNumMeshes = groups.Length;// static_cast<uint>(groups.size());
                 pScene.mMeshes = new aiMesh[groups.Length];
                 for (var i = 0; i < pScene.mNumMeshes; ++i) {
-                    aiMesh m = new aiMesh(); pScene.mMeshes[i] = m;
+                    aiMesh mesh = new aiMesh(); pScene.mMeshes[i] = mesh;
                     TempGroup g = groups[i];
 
                     if (pScene.mNumMaterials != 0 && g.mat > pScene.mNumMaterials) {
                         throw new Exception("MS3D: Encountered invalid material index, file is malformed");
                     } // no error if no materials at all - scenepreprocessor adds one then
 
-                    m.mMaterialIndex = g.mat;
-                    m.mPrimitiveTypes = aiPrimitiveType.aiPrimitiveType_TRIANGLE;
+                    mesh.mMaterialIndex = g.mat;
+                    mesh.mPrimitiveTypes = aiPrimitiveType.aiPrimitiveType_TRIANGLE;
 
-                    m.mNumFaces = g.triangles.Length;// static_cast<uint>(g.triangles.size());
-                    m.mFaces = new aiFace[g.triangles.Length];
-                    m.mNumVertices = m.mNumFaces * 3;
+                    mesh.mNumFaces = g.triangles.Length;// static_cast<uint>(g.triangles.size());
+                    mesh.mFaces = new aiFace[g.triangles.Length];
+                    mesh.mNumVertices = mesh.mNumFaces * 3;
 
                     // storage for vertices - verbose format, as requested by the postprocessing pipeline
-                    m.mVertices = new vec3[m.mNumVertices];
-                    m.mNormals = new vec3[m.mNumVertices];
-                    m.mTextureCoords[0] = new vec3[m.mNumVertices];
-                    m.mNumUVComponents[0] = 2;
+                    mesh.mVertices = new vec3[mesh.mNumVertices];
+                    mesh.mNormals = new vec3[mesh.mNumVertices];
+                    mesh.mTextureCoords[0] = new vec3[mesh.mNumVertices];
+                    mesh.mNumUVComponents[0] = 2;
 
                     //typedef std::map<uint, uint> BoneSet;
                     var mybones = new Dictionary<uint, uint>();
 
-                    for (int j = 0, n = 0; j < m.mNumFaces; ++j) {
-                        aiFace f = m.mFaces[j];
+                    for (int j = 0, n = 0; j < mesh.mNumFaces; ++j) {
+                        aiFace face = new aiFace();// m.mFaces[j];
                         if (g.triangles[j] >= triangles.Length) {
                             throw new Exception("MS3D: Encountered invalid triangle index, file is malformed");
                         }
 
                         TempTriangle t = triangles[(int)g.triangles[j]];
-                        f.mNumIndices = 3;
-                        f.mIndices = new uint[3];
+                        face.mNumIndices = 3;
+                        face.mIndices = new uint[3];
 
                         for (uint k = 0; k < 3; ++k, ++n) {
                             if (t.indices[k] >= vertices.Length) {
@@ -482,30 +482,31 @@ namespace Import3D.MS3D {
                             }
 
                             // collect vertex components
-                            m.mVertices[n] = v.pos;
+                            mesh.mVertices[n] = v.pos;
 
-                            m.mNormals[n] = t.normals[k];
-                            m.mTextureCoords[0][n] = new vec3(t.uv[k].x, 1.0f - t.uv[k].y, 0.0f);
-                            f.mIndices[k] = (uint)n;
+                            mesh.mNormals[n] = t.normals[k];
+                            mesh.mTextureCoords[0][n] = new vec3(t.uv[k].x, 1.0f - t.uv[k].y, 0.0f);
+                            face.mIndices[k] = (uint)n;
                         }
+                        mesh.mFaces[j] = face;
                     }
 
                     // allocate storage for bones
                     if (mybones.Count > 0) {
-                        var bmap = new List<uint>(joints.Length);
-                        m.mBones = new aiBone[mybones.Count];
+                        var bmap = new uint[joints.Length];
+                        mesh.mBones = new aiBone[mybones.Count];
                         foreach (var pair in mybones) {
-                            aiBone bn = m.mBones[m.mNumBones] = new aiBone();
+                            aiBone bn = mesh.mBones[mesh.mNumBones] = new aiBone();
                             TempJoint jnt = joints[(int)pair.Key];
 
                             bn.mName = jnt.name;//.Set(jnt.name);
                             bn.mWeights = new aiVertexWeight[(int)pair.Value];
 
-                            bmap[(int)pair.Key] = m.mNumBones++;
+                            bmap[(int)pair.Key] = mesh.mNumBones++;
                         }
 
                         // .. and collect bone weights
-                        for (int j = 0, n = 0; j < m.mNumFaces; ++j) {
+                        for (int j = 0, n = 0; j < mesh.mNumFaces; ++j) {
                             TempTriangle t = triangles[(int)g.triangles[j]];
 
                             for (uint k = 0; k < 3; ++k, ++n) {
@@ -516,7 +517,7 @@ namespace Import3D.MS3D {
                                         continue;
                                     }
 
-                                    aiBone outbone = m.mBones[bmap[(int)bone]];
+                                    aiBone outbone = mesh.mBones[bmap[(int)bone]];
                                     aiVertexWeight outwght = outbone.mWeights[outbone.mNumWeights++];
 
                                     outwght.mVertexId = (uint)n;
