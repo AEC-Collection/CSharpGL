@@ -64,6 +64,7 @@ namespace aiSceneLegacy {
 
         private bool Import3DFromFile(string filename) {
             //g_scene = importer.ReadFile(filename, aiProcessPreset_TargetRealtime_Quality);
+
             var model = Import3D.Obj.ObjFileParser.Parse(filename, modelName: filename);
             var scene = new Import3D.aiScene(name: filename);
             Import3D.Obj.ObjSceneBuilder.BuildScene(model, scene);
