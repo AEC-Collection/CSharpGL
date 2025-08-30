@@ -570,12 +570,14 @@ namespace Import3D.MS3D {
                         if (joint.rotFrames != null && joint.rotFrames.Length > 0) {
                             nodeAnim.mRotationKeys = new aiQuatKey[joint.rotFrames.Length];
                             foreach (var rot in joint.rotFrames) {
-                                aiQuatKey q = nodeAnim.mRotationKeys[nodeAnim.mNumRotationKeys++];
+                                aiQuatKey key = nodeAnim.mRotationKeys[nodeAnim.mNumRotationKeys];
 
-                                q.mTime = rot.time * animfps;
+                                key.mTime = rot.time * animfps;
                                 var _mat4 = mat4.FromEulerAnglesXYZ(joint.rotation)
                                         * mat4.FromEulerAnglesXYZ(rot.value);
-                                q.mValue = new aiQuaternion(new mat3(_mat4));
+                                key.mValue = new aiQuaternion(new mat3(_mat4));
+                                nodeAnim.mRotationKeys[nodeAnim.mNumRotationKeys] = key;
+                                nodeAnim.mNumRotationKeys++;
                             }
                         }
                         if (joint.posFrames != null && joint.posFrames.Length > 0) {
@@ -583,10 +585,13 @@ namespace Import3D.MS3D {
 
                             var qu = 0;// = nd.mRotationKeys;
                             foreach (var pos in joint.posFrames) {
-                                aiVectorKey v = nodeAnim.mPositionKeys[nodeAnim.mNumPositionKeys++];
+                                aiVectorKey key = nodeAnim.mPositionKeys[nodeAnim.mNumPositionKeys];
 
-                                v.mTime = pos.time * animfps;
-                                v.mValue = joint.position + pos.value;
+                                key.mTime = pos.time * animfps;
+                                key.mValue = joint.position + pos.value;
+
+                                nodeAnim.mPositionKeys[nodeAnim.mNumPositionKeys] = key;
+                                nodeAnim.mNumPositionKeys++;
 
                                 qu++;
                             }
@@ -606,9 +611,10 @@ namespace Import3D.MS3D {
     }
     public unsafe struct TempVertex {
         public vec3 position;
-        public fixed uint boneId[4];
+        public uint[] boneId = new uint[4];
         public uint refCount;
-        public fixed float weights[4];
+        public float[] weights = new float[4];
+        public TempVertex() { }
     };
 
     public unsafe struct TempTriangle {
