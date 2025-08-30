@@ -52,6 +52,7 @@ namespace Import3D.MS3D {
                 else {
                     var commentBytes = stream.ReadBytes((int)clength);
                     var comment = Encoding.ASCII.GetString(commentBytes);// string(reinterpret_cast<char*>(stream.GetPtr()), clength);
+                    comment = comment.Substring(0, comment.IndexOf('\0'));
                     outp[(int)index].SetComment(comment);
                 }
                 //stream.IncPtr(clength);
@@ -197,7 +198,7 @@ namespace Import3D.MS3D {
                     byte[] name = stream.ReadBytes(32); var strName = Encoding.ASCII.GetString(name);
 
                     //t.name[32] = '\0';
-                    t.name = strName;
+                    t.name = strName.Substring(0, strName.IndexOf('\0'));
 
                     UInt16 num = stream.ReadUInt16();
                     //stream >> num;
@@ -225,7 +226,7 @@ namespace Import3D.MS3D {
                         //stream.CopyAndAdvance(t.name, 32);
                         //t.name[32] = '\0';
                         var name = stream.ReadBytes(32); var strName = Encoding.ASCII.GetString(name);
-                        t.name = strName;
+                        t.name = strName.Substring(0, strName.IndexOf('\0'));
                     }
 
                     t.ambient = ReadColor(stream);
@@ -243,14 +244,14 @@ namespace Import3D.MS3D {
                         //stream.CopyAndAdvance(t.texture, 128);
                         //t.texture[128] = '\0';
                         var name = stream.ReadBytes(128); var strName = Encoding.ASCII.GetString(name);
-                        t.texture = strName;
+                        t.texture = strName.Substring(0, strName.IndexOf('\0'));
                     }
 
                     {
                         //stream.CopyAndAdvance(t.alphamap, 128);
                         //t.alphamap[128] = '\0';
                         var name = stream.ReadBytes(128); var strName = Encoding.ASCII.GetString(name);
-                        t.alphamap = strName;
+                        t.alphamap = strName.Substring(0, strName.IndexOf('\0'));
                     }
 
                     materials[j] = t;
@@ -274,14 +275,14 @@ namespace Import3D.MS3D {
                         //stream.CopyAndAdvance(j.name, 32);
                         //j.name[32] = '\0';
                         var name = stream.ReadBytes(128); var strName = Encoding.ASCII.GetString(name);
-                        j.name = strName;
+                        j.name = strName.Substring(0, strName.IndexOf('\0'));
                     }
 
                     {
                         //stream.CopyAndAdvance(j.parentName, 32);
                         //j.parentName[32] = '\0';
                         var name = stream.ReadBytes(128); var strName = Encoding.ASCII.GetString(name);
-                        j.parentName = strName;
+                        j.parentName = strName.Substring(0, strName.IndexOf('\0'));
                     }
 
                     j.rotation = ReadVector(stream);
@@ -331,6 +332,7 @@ namespace Import3D.MS3D {
                                 //string s = string(reinterpret_cast<char*>(stream.GetPtr()), len);
                                 //Log.WriteLine("MS3D: Model comment: ", s);
                                 var bytes = stream.ReadBytes(len); var comment = Encoding.ASCII.GetString(bytes);
+                                comment = comment.Substring(0, comment.IndexOf('\0'));
                                 Log.WriteLine($"MS3D: Model comment: {comment}");
                             }
                         }
