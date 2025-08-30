@@ -35,7 +35,7 @@ namespace Import3D.MS3D {
                        stream.ReadSingle());
             return vector;
         }
-        public void ReadComments<T>(System.IO.BinaryReader stream, List<T> outp)
+        public void ReadComments<T>(System.IO.BinaryReader stream, T[] outp)
             where T : IHasComment {
             UInt16 cnt = stream.ReadUInt16();
 
@@ -43,7 +43,7 @@ namespace Import3D.MS3D {
                 UInt32 index = stream.ReadUInt32();
                 UInt32 clength = stream.ReadUInt32();
 
-                if (index >= outp.Count) {
+                if (index >= outp.Length) {
                     Log.WriteLine("MS3D: Invalid index in comment section");
                 }
                 else if (clength > stream.BaseStream.Length - stream.BaseStream.Position) {
@@ -59,12 +59,12 @@ namespace Import3D.MS3D {
         }
 
         // ------------------------------------------------------------------------------------------------
-        public void CollectChildJoints(List<TempJoint> joints,
+        public void CollectChildJoints(TempJoint[] joints,
                 List<bool> hadit,
                 aiNode nd,
                 mat4 absTrafo) {
             uint cnt = 0;
-            for (var i = 0; i < joints.Count; ++i) {
+            for (var i = 0; i < joints.Length; ++i) {
                 if (!hadit[i] && joints[i].parentName == nd.mName) {
                     ++cnt;
                 }
@@ -73,7 +73,7 @@ namespace Import3D.MS3D {
             nd.mNumChildren = (int)cnt;
             nd.mChildren = new aiNode[cnt];
             cnt = 0;
-            for (var i = 0; i < joints.Count; ++i) {
+            for (var i = 0; i < joints.Length; ++i) {
                 if (!hadit[i] && joints[i].parentName == nd.mName) {
                     aiNode ch = nd.mChildren[cnt++] = new aiNode(joints[i].name);
                     ch.mParent = nd;
@@ -97,8 +97,8 @@ namespace Import3D.MS3D {
                 }
             }
         }
-        public void CollectChildJoints(List<TempJoint> joints, aiNode nd) {
-            var hadit = new List<bool>(joints.Count);
+        public void CollectChildJoints(TempJoint[] joints, aiNode nd) {
+            var hadit = new List<bool>(joints.Length);
             mat4 trafo;
 
             CollectChildJoints(joints, hadit, nd, trafo);
@@ -132,27 +132,31 @@ namespace Import3D.MS3D {
                 UInt16 verts = stream.ReadUInt16();
                 //stream >> verts;
 
-                var vertices = new List<TempVertex>(verts);
+                var vertices = new TempVertex[verts];
                 for (var i = 0; i < verts; ++i) {
-                    TempVertex v = vertices[i];
+                    TempVertex v = new TempVertex();// vertices[i];
 
                     //stream.IncPtr(1);
                     var tmp = stream.ReadByte();
                     v.pos = ReadVector(stream);
-                    v.bone_id[0] = stream.ReadByte();// stream.GetI1();
+                    var bone_id = (UInt32)stream.ReadByte();
+                    if (bone_id == byte.MaxValue) { bone_id = UInt32.MaxValue; }
+                    v.bone_id[0] = (uint)bone_id;// stream.GetI1();
                     v.ref_cnt = stream.ReadByte();// stream.GetI1();
 
                     v.bone_id[1] = v.bone_id[2] = v.bone_id[3] = UInt32.MaxValue;// UINT_MAX;
                     v.weights[1] = v.weights[2] = v.weights[3] = 0.0f;
                     v.weights[0] = 1.0f;
+
+                    vertices[i] = v;
                 }
 
                 UInt16 tris = stream.ReadUInt16();
                 //stream >> tris;
 
-                var triangles = new List<TempTriangle>(tris);
+                var triangles = new TempTriangle[tris];
                 for (var i = 0; i < tris; ++i) {
-                    TempTriangle t = triangles[i];
+                    var t = new TempTriangle();
 
                     //stream.IncPtr(2);
                     var tmp = stream.ReadBytes(2);
@@ -175,15 +179,17 @@ namespace Import3D.MS3D {
 
                     t.sg = stream.ReadByte();// stream.GetI1();
                     t.group = stream.ReadByte();// stream.GetI1();
+
+                    triangles[i] = t;
                 }
 
                 UInt16 grp = stream.ReadUInt16();
                 //stream >> grp;
 
                 bool need_default = false;
-                var groups = new List<TempGroup>(grp);
+                var groups = new TempGroup[grp];
                 for (var i = 0; i < grp; ++i) {
-                    TempGroup t = groups[i];
+                    var t = new TempGroup();
 
                     //stream.IncPtr(1);
                     var tmp = stream.ReadByte();
@@ -196,7 +202,7 @@ namespace Import3D.MS3D {
                     UInt16 num = stream.ReadUInt16();
                     //stream >> num;
 
-                    t.triangles.Capacity = (num);
+                    t.triangles = new uint[num];
                     for (var j = 0; j < num; ++j) {
                         t.triangles[j] = stream.ReadUInt16();// stream.GetI2();
                     }
@@ -204,14 +210,16 @@ namespace Import3D.MS3D {
                     if (t.mat == UInt32.MaxValue) {
                         need_default = true;
                     }
+
+                    groups[i] = t;
                 }
 
                 UInt16 mat = stream.ReadUInt16();
                 //stream >> mat;
 
-                var materials = new List<TempMaterial>(mat);
+                var materials = new TempMaterial[mat];
                 for (var j = 0; j < mat; ++j) {
-                    TempMaterial t = materials[j];
+                    var t = new TempMaterial();
 
                     {
                         //stream.CopyAndAdvance(t.name, 32);
@@ -244,6 +252,8 @@ namespace Import3D.MS3D {
                         var name = stream.ReadBytes(128); var strName = Encoding.ASCII.GetString(name);
                         t.alphamap = strName;
                     }
+
+                    materials[j] = t;
                 }
 
                 float animfps = stream.ReadSingle();
@@ -254,9 +264,9 @@ namespace Import3D.MS3D {
                 UInt16 joint = stream.ReadUInt16();
                 //stream >> joint;
 
-                var joints = new List<TempJoint>(joint);
+                var joints = new TempJoint[joint];
                 for (var ii = 0; ii < joint; ++ii) {
-                    TempJoint j = joints[ii];
+                    var j = new TempJoint();
 
                     //stream.IncPtr(1);
                     var tmp = stream.ReadByte();
@@ -298,6 +308,7 @@ namespace Import3D.MS3D {
                         j.posFrames[a].time = stream.ReadSingle();
                         j.posFrames[a].value = ReadVector(stream);
                     }
+                    joints[ii] = j;
                 }
 
                 if (stream.BaseStream.Length - stream.BaseStream.Position > 4) {
@@ -348,13 +359,13 @@ namespace Import3D.MS3D {
 
                 // 2 ------------ convert to proper aiXX data structures -----------------------------------
 
-                if (need_default && materials.Count == 0) {
+                if (need_default && materials.Length == 0) {
                     Log.WriteLine("MS3D: Found group with no material assigned, spawning default material");
                     // if one of the groups has no material assigned, but there are other
                     // groups with materials, a default material needs to be added (
                     // scenepreprocessor adds a default material only if nummat==0).
                     var m = new TempMaterial(); m.name = "<MS3D_DefaultMat>";
-                    materials.Add(m);//.emplace_back();
+                    materials = new TempMaterial[] { m };//.emplace_back();
                     //TempMaterial m = materials.back();
 
                     //strcpy(m.name, "<MS3D_DefaultMat>");
@@ -366,18 +377,18 @@ namespace Import3D.MS3D {
                     //m.texture[0] = m.alphamap[0] = '\0';
                     m.texture = ""; m.alphamap = "";
 
-                    for (var i = 0; i < groups.Count; ++i) {
+                    for (var i = 0; i < groups.Length; ++i) {
                         TempGroup g = groups[i];
                         if (g.mat == UInt32.MaxValue) {
-                            g.mat = (uint)(materials.Count - 1);// static_cast<uint>(materials.size() - 1);
+                            g.mat = (uint)(materials.Length - 1);// static_cast<uint>(materials.size() - 1);
                         }
                     }
                 }
 
                 // convert materials to our generic key-value dict-alike
-                if (materials.Count > 0) {
-                    pScene.mMaterials = new aiMaterial[materials.Count];
-                    for (int i = 0; i < materials.Count; ++i) {
+                if (materials.Length > 0) {
+                    pScene.mMaterials = new aiMaterial[materials.Length];
+                    for (int i = 0; i < materials.Length; ++i) {
                         var mo = new aiMaterial();
                         pScene.mMaterials[pScene.mNumMaterials++] = mo;
 
@@ -410,12 +421,12 @@ namespace Import3D.MS3D {
                 }
 
                 // convert groups to meshes
-                if (groups.Count == 0) {
+                if (groups.Length == 0) {
                     throw new Exception("MS3D: Didn't get any group records, file is malformed");
                 }
 
-                pScene.mNumMeshes = groups.Count;// static_cast<uint>(groups.size());
-                pScene.mMeshes = new aiMesh[groups.Count];
+                pScene.mNumMeshes = groups.Length;// static_cast<uint>(groups.size());
+                pScene.mMeshes = new aiMesh[groups.Length];
                 for (var i = 0; i < pScene.mNumMeshes; ++i) {
                     aiMesh m = new aiMesh(); pScene.mMeshes[i] = m;
                     TempGroup g = groups[i];
@@ -427,8 +438,8 @@ namespace Import3D.MS3D {
                     m.mMaterialIndex = g.mat;
                     m.mPrimitiveTypes = aiPrimitiveType.aiPrimitiveType_TRIANGLE;
 
-                    m.mNumFaces = g.triangles.Count;// static_cast<uint>(g.triangles.size());
-                    m.mFaces = new aiFace[g.triangles.Count];
+                    m.mNumFaces = g.triangles.Length;// static_cast<uint>(g.triangles.size());
+                    m.mFaces = new aiFace[g.triangles.Length];
                     m.mNumVertices = m.mNumFaces * 3;
 
                     // storage for vertices - verbose format, as requested by the postprocessing pipeline
@@ -442,7 +453,7 @@ namespace Import3D.MS3D {
 
                     for (int j = 0, n = 0; j < m.mNumFaces; ++j) {
                         aiFace f = m.mFaces[j];
-                        if (g.triangles[j] >= triangles.Count) {
+                        if (g.triangles[j] >= triangles.Length) {
                             throw new Exception("MS3D: Encountered invalid triangle index, file is malformed");
                         }
 
@@ -451,14 +462,14 @@ namespace Import3D.MS3D {
                         f.mIndices = new uint[3];
 
                         for (uint k = 0; k < 3; ++k, ++n) {
-                            if (t.indices[k] >= vertices.Count) {
+                            if (t.indices[k] >= vertices.Length) {
                                 throw new Exception("MS3D: Encountered invalid vertex index, file is malformed");
                             }
 
                             TempVertex v = vertices[(int)t.indices[k]];
                             for (uint a = 0; a < 4; ++a) {
                                 if (v.bone_id[a] != UInt32.MaxValue) {
-                                    if (v.bone_id[a] >= joints.Count) {
+                                    if (v.bone_id[a] >= joints.Length) {
                                         throw new Exception("MS3D: Encountered invalid bone index, file is malformed");
                                     }
                                     if (mybones.TryGetValue(v.bone_id[a], out var value)) {
@@ -481,7 +492,7 @@ namespace Import3D.MS3D {
 
                     // allocate storage for bones
                     if (mybones.Count > 0) {
-                        var bmap = new List<uint>(joints.Count);
+                        var bmap = new List<uint>(joints.Length);
                         m.mBones = new aiBone[mybones.Count];
                         foreach (var pair in mybones) {
                             aiBone bn = m.mBones[m.mNumBones] = new aiBone();
@@ -543,7 +554,7 @@ namespace Import3D.MS3D {
 #endif
 
                 // convert animations as well
-                if (joints.Count > 0) {
+                if (joints.Length > 0) {
 #if ! ASSIMP_BUILD_MS3D_ONE_NODE_PER_MESH
                     rt.mChildren = new aiNode[1];
                     rt.mNumChildren = 1;
@@ -569,7 +580,7 @@ namespace Import3D.MS3D {
                     // to pass the validation)
                     // anim.mDuration = totalframes/animfps;
 
-                    anim.mChannels = new aiNodeAnim[joints.Count];
+                    anim.mChannels = new aiNodeAnim[joints.Length];
                     foreach (var aJoint in joints) {
                         //if ((*it).rotFrames.empty() && (*it).posFrames.empty()) { continue; }
                         if ((aJoint.rotFrames == null || aJoint.rotFrames.Length == 0)
@@ -632,7 +643,7 @@ namespace Import3D.MS3D {
         /// <summary>
         /// vec2[3]
         /// </summary>
-        public vec2[] uv = new vec2[2];
+        public vec2[] uv = new vec2[3];
 
         public uint sg, group;
 
@@ -641,12 +652,9 @@ namespace Import3D.MS3D {
 
     public unsafe struct TempGroup : IHasComment {
         public string name;// = new byte[33]; // +0
-        public List<uint> triangles;///= new List<uint>();
+        public uint[] triangles;///= new List<uint>();
         public uint mat; // 0xff is no material
         public string comment;
-        public TempGroup() {
-            this.triangles = new List<uint>();
-        }
         public void SetComment(string comment) {
             this.comment = comment;
         }

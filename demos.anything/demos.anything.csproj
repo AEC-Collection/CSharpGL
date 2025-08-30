@@ -50,6 +50,7 @@
 		<ProjectReference Include="..\CSharpGL.Windows\CSharpGL.Windows.csproj" />
 		<ProjectReference Include="..\CSharpGL\CSharpGL.csproj" />
 		<ProjectReference Include="..\Infrastructure\Import3D\Import3D.FBX\Import3D.FBX\Import3D.FBX.csproj" />
+		<ProjectReference Include="..\Infrastructure\Import3D\Import3D.MS3D\Import3D.MS3D.csproj" />
 		<ProjectReference Include="..\Infrastructure\Import3D\Import3D.Obj\Import3D.Obj.csproj" />
 		<ProjectReference Include="..\Infrastructure\Import3D\Import3D.STL\Import3D.STL.csproj" />
 		<ProjectReference Include="..\Infrastructure\Import3D\Import3D\Import3D.csproj" />
@@ -243,6 +244,24 @@
 		</None>
 		<None Update="media\fonts\VeraMoBI.ttf_sdf.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="media\Import3D\ms3d\jeep1.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="media\Import3D\ms3d\jeep1.ms3d">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="media\Import3D\ms3d\jeep1.readme.txt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="media\Import3D\ms3d\twospheres.ms3d">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="media\Import3D\ms3d\twospheres_withmats.ms3d">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="media\Import3D\ms3d\Wuson.ms3d">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="media\irr-demo\animMesh.irr">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -547,6 +566,11 @@
 		<None Update="media\textures\wood\roughness.png">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Folder Include="media\Import3D\ms3d\" />
 	</ItemGroup>
 
 </Project>
