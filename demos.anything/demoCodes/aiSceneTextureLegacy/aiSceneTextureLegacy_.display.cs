@@ -46,7 +46,7 @@ namespace aiSceneTextureLegacy {
 
             gl.glLoadIdentity();               // Reset MV Matrix
 
-            gl.glTranslatef(0.0f, 0.0f, -40.0f); // Move 40 Units And Into The Screen
+            gl.glTranslatef(0.0f, -3.0f, -10.0f); // Move 40 Units And Into The Screen
             gl.glRotatef(xrot, 1.0f, 0.0f, 0.0f);
             gl.glRotatef(yrot, 0.0f, 1.0f, 0.0f);
             gl.glRotatef(zrot, 0.0f, 0.0f, 1.0f);
