@@ -64,15 +64,75 @@ namespace aiSceneTextureLegacy {
 
         private bool Import3DFromFile(string filename) {
             //g_scene = importer.ReadFile(filename, aiProcessPreset_TargetRealtime_Quality);
-
-            var model = Import3D.Obj.ObjFileParser.Parse(filename, modelName: filename);
+            //var model = Import3D.Obj.ObjFileParser.Parse(filename, modelName: filename);
             var scene = new Import3D.aiScene(name: filename);
-            Import3D.Obj.ObjSceneBuilder.BuildScene(model, scene);
+            //Import3D.Obj.ObjSceneBuilder.BuildScene(model, scene);
+            var importer = new Import3D.MS3D.MS3DImporter();
+            importer.InternReadFile(filename, scene);
             g_scene = scene;
+
+            CSharpGL.vec3 min = new CSharpGL.vec3(), max = new CSharpGL.vec3();
+            get_bounding_box(scene, ref min, ref max);
+            scene_min = *(Import3D.vec3*)(&min); scene_max = *(Import3D.vec3*)(&max);
+            scene_center.x = (scene_min.x + scene_max.x) / 2.0f;
+            scene_center.y = (scene_min.y + scene_max.y) / 2.0f;
+            scene_center.z = (scene_min.z + scene_max.z) / 2.0f;
 
             // We're done. Everything will be cleaned up by the importer destructor
             return true;
         }
+        /* ---------------------------------------------------------------------------- */
+        void get_bounding_box(aiScene scene, ref CSharpGL.vec3 min, ref CSharpGL.vec3 max) {
+            CSharpGL.mat4 trafo = CSharpGL.mat4.identity();
+
+            get_bounding_box_for_node(scene, scene.mRootNode, ref min, ref max, trafo);
+        }
+
+        void get_bounding_box_for_node(aiScene scene, aiNode node,
+                   ref CSharpGL.vec3 min, ref CSharpGL.vec3 max, CSharpGL.mat4 trafo,
+                   bool firstTime = true) {
+            //CSharpGL.mat4 prev;
+
+            //prev = trafo;
+            //aiMultiplyMatrix4(trafo, &node.mTransformation);
+            var m = node.mTransformation; var m2 = (CSharpGL.mat4*)&m;
+            trafo = trafo * (*m2);
+
+            for (var n = 0; n < node.mNumMeshes; ++n) {
+                var mesh = scene.mMeshes[node.mMeshes[n]];
+                for (var t = 0; t < mesh.mNumVertices; ++t) {
+
+                    var tmp = mesh.mVertices[t];
+                    var tmp2 = (CSharpGL.vec3*)&tmp;
+                    //aiTransformVecByMatrix4(&tmp, trafo);
+                    var tmp3 = trafo * new CSharpGL.vec4(*tmp2, 1.0f);
+                    //*tmp2 = new CSharpGL.vec3(tmp3.x, tmp3.y, tmp3.z);
+                    Debug.Assert(tmp3.w == 1.0f);
+
+                    if (firstTime) {
+                        min = new CSharpGL.vec3(tmp3.x, tmp3.y, tmp3.z);
+                        max = new CSharpGL.vec3(tmp3.x, tmp3.y, tmp3.z);
+                        firstTime = false;
+                    }
+                    else {
+                        min.x = Math.Min(min.x, tmp3.x);
+                        min.y = Math.Min(min.y, tmp3.y);
+                        min.z = Math.Min(min.z, tmp3.z);
+
+                        max.x = Math.Max(max.x, tmp3.x);
+                        max.y = Math.Max(max.y, tmp3.y);
+                        max.z = Math.Max(max.z, tmp3.z);
+                    }
+                }
+            }
+
+            for (var n = 0; n < node.mNumChildren; ++n) {
+                get_bounding_box_for_node(scene, node.mChildren[n], ref min, ref max, trafo, firstTime);
+            }
+
+            //trafo = prev;
+        }
+
         bool LoadGLTextures(GL gl, aiScene scene) {
             if (scene.HasTextures()) { return true; }
 

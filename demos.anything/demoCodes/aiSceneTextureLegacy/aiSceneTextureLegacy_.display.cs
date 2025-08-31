@@ -33,7 +33,8 @@ namespace aiSceneTextureLegacy {
         Dictionary<string, uint> textureIdMap = new();// map image filenames to textureId
         GLuint[] textureIds;                         // pointer to texture Array
         //static string modelpath = "media/STL-models/Spider_ascii.stl";
-        static string modelpath = "media/obj-spider/spider.obj.txt";
+        //static string modelpath = "media/obj-spider/spider.obj.txt";
+        static string modelpath = "media/Import3D/ms3d/jeep1.ms3d";
         GLfloat xrot;
         GLfloat yrot;
         GLfloat zrot;
