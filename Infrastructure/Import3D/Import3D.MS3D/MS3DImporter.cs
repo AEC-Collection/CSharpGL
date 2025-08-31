@@ -545,7 +545,6 @@ namespace Import3D.MS3D {
 #endif
                     jointRoot.mParent = rootNode;
                     CollectChildJoints(joints, jointRoot);
-                    //jt.mName.Set("<MS3DJointRoot>");
 
                     scene.mAnimations = new aiAnimation[scene.mNumAnimations = 1];
                     var anim = new aiAnimation(); anim.mName = ("<MS3DMasterAnim>");
@@ -574,7 +573,7 @@ namespace Import3D.MS3D {
 
                                 key.mTime = rot.time * animfps;
                                 var _mat4 = mat4.FromEulerAnglesXYZ(joint.rotation)
-                                        * mat4.FromEulerAnglesXYZ(rot.value);
+                                          * mat4.FromEulerAnglesXYZ(rot.value);
                                 key.mValue = new aiQuaternion(new mat3(_mat4));
                                 nodeAnim.mRotationKeys[nodeAnim.mNumRotationKeys] = key;
                                 nodeAnim.mNumRotationKeys++;
