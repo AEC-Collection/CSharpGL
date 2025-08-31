@@ -20,8 +20,8 @@ using System.Runtime.ConstrainedExecution;
 using System.Drawing.Design;
 using System.Numerics;
 
-namespace aiSceneLegacy {
-    unsafe partial class aiSceneLegacy_ {
+namespace aiSceneTextureLegacy {
+    unsafe partial class aiSceneTextureLegacy_ {
 
         public override void init(GL gl) {
 

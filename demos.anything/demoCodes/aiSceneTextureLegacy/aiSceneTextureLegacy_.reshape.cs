@@ -20,8 +20,8 @@ using System.Runtime.ConstrainedExecution;
 using System.Drawing.Design;
 using System.Numerics;
 
-namespace aiSceneLegacy {
-    internal unsafe partial class aiSceneLegacy_ : demoCode {
+namespace aiSceneTextureLegacy {
+    internal unsafe partial class aiSceneTextureLegacy_ : demoCode {
 
         public override void reshape(GL gl, int width, int height) {
             //this.scene.camera.AspectRatio = ((float)this.canvas.Width) / ((float)this.canvas.Height);

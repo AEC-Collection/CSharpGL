@@ -20,8 +20,8 @@ using System.Runtime.ConstrainedExecution;
 using System.Drawing.Design;
 using System.Numerics;
 
-namespace aiSceneLegacy {
-    internal unsafe partial class aiSceneLegacy_ : demoCode {
+namespace aiSceneTextureLegacy {
+    internal unsafe partial class aiSceneTextureLegacy_ : demoCode {
 
         static GLfloat[] LightAmbient = { 0.5f, 0.5f, 0.5f, 1.0f };
         static GLfloat[] LightDiffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -38,7 +38,7 @@ namespace aiSceneLegacy {
         GLfloat yrot;
         GLfloat zrot;
 
-        public aiSceneLegacy_(FormInstance mainForm, WindowsGLCanvas canvas) : base(mainForm, canvas) { }
+        public aiSceneTextureLegacy_(FormInstance mainForm, WindowsGLCanvas canvas) : base(mainForm, canvas) { }
 
         public override void display(GL gl) {
             gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT); // Clear The Screen And The Depth Buffer
